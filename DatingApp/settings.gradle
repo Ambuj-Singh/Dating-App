@@ -1,0 +1,2 @@
+rootProject.name='Dream Dating'
+include ':app'

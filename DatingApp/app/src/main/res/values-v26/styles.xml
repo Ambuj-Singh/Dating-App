@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/dark_grey</item>
+        <item name="drawerArrowStyle">@style/DrawerIcon</item>
+    </style>
+
+    <style name="DrawerIcon" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@color/colorPrimary</item>
+    </style>
+    <style name="MyDarkToolbarStyle" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorBackground">@color/dark_grey</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Title" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">50sp</item>
+        <item name="android:fontFamily">@font/rubik_light</item>
+    </style>
+
+    <style name="Title_black" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">50sp</item>
+        <item name="android:fontFamily">@font/rubik_light</item>
+    </style>
+
+    <style name="title" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:font">@font/mons_reg</item>
+        <item name="android:padding">15dp</item>
+    </style>
+    <style name="switches" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+
+
+    <style name="title_black" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:font">@font/mons_reg</item>
+        <item name="android:padding">15dp</item>
+    </style>
+    <style name="title_social" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/mons_reg</item>
+        <item name="android:padding">11dp</item>
+    </style>
+    <style name="custom_butt" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:background">@color/BlueTone</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="custom_butt_transparent" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="validating" parent="@style/Widget.MaterialComponents.ProgressIndicator.Circular.Indeterminate">
+        <item name="android:indeterminateTint">@color/white</item>
+    </style>
+    <style name="validating_black" parent="@style/Widget.MaterialComponents.ProgressIndicator.Circular.Indeterminate">
+        <item name="android:indeterminateTint">@color/black</item>
+    </style>
+
+    <style name="big_title" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:fontFamily">@font/rubik_regular</item>
+    </style>
+
+    <style name="big_title_black" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:fontFamily">@font/rubik_regular</item>
+    </style>
+
+    <style name="colored_custom_butt_transparent" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+
+    <style name="LinearProgress" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressBackgroundTint">#D3D3D3</item>
+        <item name="android:progressTint">#FFFFFF</item>
+    </style>
+    <style name="TextAppearance.AppCompat.Notification.Title" parent="TextAppearance.Compat.Notification.Title">
+    </style>
+
+    <style name="TextAppearance.AppCompat.Notification.Time" parent="TextAppearance.Compat.Notification.Time">
+    </style>
+
+    <style name="TextAppearance.AppCompat.Notification.Info" parent="TextAppearance.Compat.Notification.Info">
+    </style>
+
+
+</resources>

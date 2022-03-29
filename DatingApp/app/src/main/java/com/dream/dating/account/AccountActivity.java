@@ -1,0 +1,170 @@
+package com.dream.dating.account;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+import androidx.work.Constraints;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+
+import com.dream.dating.ProfileInfoGrabber;
+import com.dream.dating.R;
+import com.dream.dating.Status_Offline;
+import com.dream.dating.Status_Online;
+import com.dream.dating.user.ui.UserProfile;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.UUID;
+
+public class AccountActivity extends AppCompatActivity {
+
+    private AppBarConfiguration mAppBarConfiguration;
+    private OneTimeWorkRequest oneTimeWorkRequestA, oneTimeWorkRequestB;
+    private ImageView profile_image;
+    private TextView username;
+    private TextView looking_for;
+    private DocumentReference df_user;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_account);
+
+        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+        String UserUID = FirebaseAuth.getInstance().getUid();
+        df_user = firebaseFirestore.collection("users").document(UserUID);
+        profile_image = findViewById(R.id.imageView_profile_pic);
+        username = findViewById(R.id.username_nav_view);
+        looking_for = findViewById(R.id.looking_for_nav);
+
+
+    }
+
+
+
+    private interface waitTillResults{
+        void Callback(String dp,String username,String looking_for);
+    }
+
+    private void fetchUserData(DocumentReference df_user, final waitTillResults onCallback) {
+        df_user.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot != null) {
+                    ProfileInfoGrabber getter = documentSnapshot.toObject(ProfileInfoGrabber.class);
+                    if (getter != null) {
+                        String username = getter.getusername();
+
+                        String dp = getter.getProfileURL();
+                    }
+                }
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.account, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                || super.onSupportNavigateUp();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(oneTimeWorkRequestA!=null) {
+            UUID getID = oneTimeWorkRequestA.getId();
+            WorkManager.getInstance(getApplicationContext()).cancelWorkById(getID);
+        }
+        Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build();
+
+        oneTimeWorkRequestB = new OneTimeWorkRequest.Builder(Status_Online.class)
+                .setConstraints(constraints)
+                .addTag("Status_Update")
+                .build();
+        WorkManager.getInstance(getApplicationContext()).enqueue(oneTimeWorkRequestB);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(oneTimeWorkRequestB!=null) {
+            UUID getID = oneTimeWorkRequestB.getId();
+            WorkManager.getInstance(getApplicationContext()).cancelWorkById(getID);
+        }
+        Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build();
+
+        oneTimeWorkRequestA = new OneTimeWorkRequest.Builder(Status_Offline.class)
+                .setConstraints(constraints)
+                .addTag("Status_Update")
+                .build();
+        WorkManager.getInstance(getApplicationContext()).enqueue(oneTimeWorkRequestA);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(oneTimeWorkRequestA!=null) {
+            UUID getID = oneTimeWorkRequestA.getId();
+            WorkManager.getInstance(getApplicationContext()).cancelWorkById(getID);
+        }
+        Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build();
+
+        oneTimeWorkRequestB = new OneTimeWorkRequest.Builder(Status_Online.class)
+                .setConstraints(constraints)
+                .addTag("Status_Update")
+                .build();
+        WorkManager.getInstance(getApplicationContext()).enqueue(oneTimeWorkRequestB);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(oneTimeWorkRequestB!=null) {
+            UUID getID = oneTimeWorkRequestB.getId();
+            WorkManager.getInstance(getApplicationContext()).cancelWorkById(getID);
+        }
+        Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build();
+
+        oneTimeWorkRequestA = new OneTimeWorkRequest.Builder(Status_Offline.class)
+                .setConstraints(constraints)
+                .addTag("Status_Update")
+                .build();
+        WorkManager.getInstance(getApplicationContext()).enqueue(oneTimeWorkRequestA);
+    }
+
+
+    public void jumpToUserProfile(View view) {
+        Intent intent = new Intent(this, UserProfile.class);
+        startActivity(intent);
+    }
+}

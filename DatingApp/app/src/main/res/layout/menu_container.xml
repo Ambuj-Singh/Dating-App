@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/dark_grey"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/edit"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_height="55dp"
+        android:textAlignment="textStart"
+        app:icon="@drawable/ic_baseline_edit_24"
+        android:onClick="jumpToUserProfile"
+        android:text="@string/edit_profile" />
+    <Button
+        android:id="@+id/gallery"
+      style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_height="55dp"
+        android:textAlignment="textStart"
+        app:icon="@drawable/ic_menu_gallery"
+        android:text="@string/menu_gallery" />
+    <Button
+        android:id="@+id/premium"
+      style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_height="55dp"
+        android:textAlignment="textStart"
+        app:icon="@drawable/ic_baseline_star_24"
+        android:text="@string/premium" />
+    <Button
+        android:id="@+id/settings"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_height="55dp"
+        android:textAlignment="textStart"
+        app:icon="@drawable/ic_baseline_settings_24"
+        android:text="@string/settings" />
+    <Button
+        android:id="@+id/feedback"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_height="55dp"
+        android:textAlignment="textStart"
+        app:icon="@drawable/ic_baseline_email_24"
+        android:text="@string/feedback_amp_support" />
+    <Button
+        android:id="@+id/about_us"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_height="55dp"
+        android:textAlignment="textStart"
+        app:icon="@drawable/ic_baseline_favorite_border_24"
+        android:text="@string/about_us" />
+    <Button
+        android:id="@+id/privacy"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_height="55dp"
+        android:textAlignment="textStart"
+        app:icon="@drawable/ic_baseline_book_24"
+        android:text="@string/privacy_statements" />
+    <Button
+        android:id="@+id/logout"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_height="55dp"
+        android:textAlignment="textStart"
+        app:icon="@drawable/ic_baseline_exit_to_app_24"
+        android:text="@string/logout" />
+
+
+</LinearLayout>

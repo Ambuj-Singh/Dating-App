@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="4dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="2">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_weight="1.8"
+        android:weightSum="3"
+        android:background="@drawable/message_input_background">
+        <ImageView
+            android:layout_weight=".3"
+            android:id="@+id/switch_to_emoji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:clickable="true"
+            android:src="@drawable/ic_baseline_emoji_emotions_24"
+            android:focusable="true" />
+
+        <EditText
+            android:layout_weight="2.4"
+            android:id="@+id/input_message_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_input"
+            android:textSize="20sp"
+            android:textColorHint="@color/grey"
+            android:fontFamily="@font/rubik_regular"
+            android:textColor="@color/white"
+            android:padding="16dp"
+            android:background="@drawable/message_input_background"
+            />
+        <ImageView
+            android:id="@+id/display_attachment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.3"
+            android:clickable="true"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_baseline_attach_file_24"
+            android:focusable="true" />
+
+    </LinearLayout>
+<com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:layout_width="55dp"
+    android:layout_height="55dp"
+    android:layout_weight=".2"
+    android:id="@+id/send_message"
+    app:srcCompat="@drawable/ic_baseline_send_24"
+    android:layout_marginStart="4dp"
+    app:tint="@color/white"
+    style="@style/floating_action_button"
+    app:backgroundTint="@color/colorPrimary">
+</com.google.android.material.floatingactionbutton.FloatingActionButton>
+</LinearLayout>
+</FrameLayout>

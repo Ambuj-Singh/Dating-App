@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.google.android.material.chip.Chip
+            android:id="@+id/male_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/title_social"
+            android:text="@string/male"
+            android:layout_margin="8dp"
+            />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/female_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/title_social"
+            android:text="@string/female"
+            android:layout_margin="8dp"
+            />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/other_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/title_social"
+            android:text="@string/other"
+            android:layout_margin="8dp"
+            />
+    </LinearLayout>
+
+</FrameLayout>

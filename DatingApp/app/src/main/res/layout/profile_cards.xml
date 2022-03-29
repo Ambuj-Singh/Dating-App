@@ -1,0 +1,1263 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@color/dark_grey"
+        android:elevation="8dp"
+        android:padding="16dp">
+
+        <ImageButton
+            android:id="@+id/bio_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="15dp"
+            android:background="@drawable/ic_baseline_edit_24"
+            android:onClick="showDialog_about_me_edit" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/dark_grey"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/title_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/About"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/profile_bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/material_text"
+                style="@style/title_social"
+                android:padding="8dp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="end">
+                <TextView
+                    android:id="@+id/save_about_me"
+                    style="@style/title_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/done"
+                    android:textColor="@color/white"
+                    android:onClick="save_about_me"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!--general card-->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@color/dark_grey"
+        android:elevation="8dp"
+        android:padding="16dp">
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/general_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="50dp"
+            android:padding="15dp"
+            android:theme="@style/switches" />
+
+        <ImageButton
+            android:id="@+id/general_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="15dp"
+            android:background="@drawable/ic_baseline_edit_24"
+            android:onClick="enable_general_edit" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/dark_grey"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/title_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/general"
+                android:textColor="@color/white" />
+
+            <LinearLayout
+                android:id="@+id/general_card_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/material_text"
+                android:orientation="vertical">
+
+                <!--Social line profession-->
+                <View style="@style/Divider" />
+
+                <RelativeLayout
+                    android:id="@+id/language_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="showDialog_general_language">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/language"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:id="@+id/general_language_choice"
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/none"
+                            android:textAlignment="textStart" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <!--Social line religion-->
+
+                <View style="@style/Divider" />
+
+                <RelativeLayout
+                    android:id="@+id/looking_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="showDialog_general_looking">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/looking_for"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:id="@+id/general_looking_choice"
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/none"
+                            android:textAlignment="textStart" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+                <!--social line favourite food-->
+                <View style="@style/Divider" />
+
+                <RelativeLayout
+                    android:id="@+id/smoker_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="showDialog_general_smoker">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/smoker"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:id="@+id/general_smoker_choice"
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/none"
+                            android:textAlignment="textStart" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+                <!--social line music-->
+                <View style="@style/Divider" />
+
+                <RelativeLayout
+                    android:id="@+id/body_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="showDialog_body_choose">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/body"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:id="@+id/general_body_choice"
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/none"
+                            android:textAlignment="textStart" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+                <!--social line sports-->
+                <View style="@style/Divider" />
+
+                <RelativeLayout
+                    android:id="@+id/body_hair_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="showDialog_general_body_hair">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/body_hair"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:id="@+id/general_body_hair_choice"
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/none"
+                            android:textAlignment="textStart" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+                <!--social line sports-->
+                <View style="@style/Divider" />
+
+                <RelativeLayout
+                    android:id="@+id/eye_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="showDialog_general_eyes_color">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/eye_color"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:id="@+id/general_eye_color_choice"
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/none"
+                            android:textAlignment="textStart" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+                <!--social line travel-->
+                <View style="@style/Divider" />
+
+                <RelativeLayout
+                    android:id="@+id/hair_color_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="showDialog_general_hair_color">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/hair_color"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:id="@+id/general_hair_color_choice"
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/none"
+                            android:textAlignment="textStart" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+                <!--social line travel-->
+                <View style="@style/Divider" />
+
+                <RelativeLayout
+                    android:id="@+id/piercings_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="showDialog_general_piercings">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/piercings"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:id="@+id/general_piercings_choice"
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/none"
+                            android:textAlignment="textStart" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <View style="@style/Divider" />
+
+                <RelativeLayout
+                    android:id="@+id/tattoos_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="showDialog_general_tattoos">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/tattoos"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:id="@+id/general_tattoos_choice"
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/none"
+                            android:textAlignment="textStart" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="end">
+            <TextView
+                android:id="@+id/save_general"
+                style="@style/title_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/done"
+                android:textColor="@color/white"
+                android:onClick="save_general"/>
+
+        </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:elevation="8dp"
+        android:background="@color/dark_grey"
+        android:padding="16dp">
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/social_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="50dp"
+            android:padding="15dp"
+            android:theme="@style/switches" />
+
+        <ImageButton
+            android:id="@+id/social_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="15dp"
+            android:background="@drawable/ic_baseline_edit_24"
+            android:onClick="enable_edit" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/dark_grey"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/title_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/social"
+                android:textColor="@color/white" />
+
+            <LinearLayout
+                android:id="@+id/social_card_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/material_text"
+                android:orientation="vertical">
+                <!--first social line-->
+                <RelativeLayout
+                    android:id="@+id/social_dot_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="showDialog_dot_1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="4dp"
+                        android:weightSum="3">
+
+                        <TextView
+
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.15"
+                            android:text="@string/first_social"
+                            android:textAlignment="textEnd" />
+
+                        <LinearLayout
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.7">
+
+                            <ImageView
+                                android:id="@+id/social_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="2dp"
+                                android:background="@drawable/empty_circle" />
+
+                            <ImageView
+                                android:id="@+id/social_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="2dp"
+                                android:background="@drawable/empty_circle" />
+
+                            <ImageView
+                                android:id="@+id/social_3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="2dp"
+                                android:background="@drawable/empty_circle" />
+
+                            <ImageView
+                                android:id="@+id/social_4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="2dp"
+                                android:background="@drawable/empty_circle" />
+
+                            <ImageView
+                                android:id="@+id/social_5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="2dp"
+                                android:background="@drawable/empty_circle" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.15"
+                            android:text="@string/second_social"
+                            android:textAlignment="textStart" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <!--second social line-->
+                <RelativeLayout
+                    android:id="@+id/social_dot_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="showDialog_dot_2">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="4dp"
+                        android:weightSum="3">
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.15"
+                            android:text="@string/third_social"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/white" />
+
+                        <LinearLayout
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.7">
+
+                            <ImageView
+                                android:id="@+id/social_6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="2dp"
+                                android:background="@drawable/empty_circle" />
+
+                            <ImageView
+                                android:id="@+id/social_7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="2dp"
+                                android:background="@drawable/empty_circle" />
+
+                            <ImageView
+                                android:id="@+id/social_8"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="2dp"
+                                android:background="@drawable/empty_circle" />
+
+                            <ImageView
+                                android:id="@+id/social_9"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="2dp"
+                                android:background="@drawable/empty_circle" />
+
+                            <ImageView
+                                android:id="@+id/social_10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="2dp"
+                                android:background="@drawable/empty_circle" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.15"
+                            android:gravity="end"
+                            android:text="@string/fourth_social"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/white"
+                            tools:ignore="RtlCompat" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+
+                <!--third social line-->
+                <RelativeLayout
+                    android:id="@+id/social_dot_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="showDialog_dot_3">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="4dp"
+                        android:weightSum="3">
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.15"
+
+                            android:text="@string/fifth_social"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/white" />
+
+                        <LinearLayout
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.7">
+
+                            <ImageView
+                                android:id="@+id/social_11"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="2dp"
+                                android:background="@drawable/empty_circle" />
+
+                            <ImageView
+                                android:id="@+id/social_12"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="2dp"
+                                android:background="@drawable/empty_circle" />
+
+                            <ImageView
+                                android:id="@+id/social_13"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="2dp"
+                                android:background="@drawable/empty_circle" />
+
+                            <ImageView
+                                android:id="@+id/social_14"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="2dp"
+                                android:background="@drawable/empty_circle" />
+
+                            <ImageView
+                                android:id="@+id/social_15"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="2dp"
+                                android:background="@drawable/empty_circle" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.15"
+                            android:gravity="end"
+                            android:text="@string/six_social"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/white"
+                            tools:ignore="RtlCompat" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <!--fourth social line-->
+                <RelativeLayout
+                    android:id="@+id/social_dot_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="showDialog_dot_4">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="4dp"
+                        android:weightSum="3">
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.15"
+                            android:text="@string/seven_social"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/white" />
+
+                        <LinearLayout
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.70">
+
+                            <ImageView
+                                android:id="@+id/social_16"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="2dp"
+                                android:background="@drawable/empty_circle" />
+
+                            <ImageView
+                                android:id="@+id/social_17"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="2dp"
+                                android:background="@drawable/empty_circle" />
+
+                            <ImageView
+                                android:id="@+id/social_18"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="2dp"
+                                android:background="@drawable/empty_circle" />
+
+                            <ImageView
+                                android:id="@+id/social_19"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="2dp"
+                                android:background="@drawable/empty_circle" />
+
+                            <ImageView
+                                android:id="@+id/social_20"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="2dp"
+                                android:background="@drawable/empty_circle" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.15"
+                            android:gravity="end"
+                            android:text="@string/eight_social"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/white"
+                            tools:ignore="RtlCompat" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+                <!--Social line profession-->
+                <View style="@style/Divider" />
+
+                <RelativeLayout
+                    android:id="@+id/profession_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="showDialog_social_prof">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/profession"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:id="@+id/social_profession_choice"
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/none"
+                            android:textAlignment="textStart" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <!--Social line religion-->
+
+                <View style="@style/Divider" />
+
+                <RelativeLayout
+                    android:id="@+id/religion_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="showDialog_social_religion">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/religion"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:id="@+id/social_religion_choice"
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/none"
+                            android:textAlignment="textStart" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+                <!--social line favourite food-->
+                <View style="@style/Divider" />
+
+                <RelativeLayout
+                    android:id="@+id/food_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="showDialog_social_food">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/FavFood"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:id="@+id/social_food_choice"
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/none"
+                            android:textAlignment="textStart" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+                <!--social line music-->
+                <View style="@style/Divider" />
+
+                <RelativeLayout
+                    android:id="@+id/music_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="showDialog_social_music">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/music"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:id="@+id/social_music_choice"
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/none"
+                            android:textAlignment="textStart" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+                <!--social line sports-->
+                <View style="@style/Divider" />
+
+                <RelativeLayout
+                    android:id="@+id/sports_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="showDialog_social_sports">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/Sports"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:id="@+id/social_sports_choice"
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/none"
+                            android:textAlignment="textStart" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+                <!--social line sports-->
+                <View style="@style/Divider" />
+
+                <RelativeLayout
+                    android:id="@+id/going_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="showDialog_social_going_out">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/GoingOut"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:id="@+id/social_going_choice"
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/none"
+                            android:textAlignment="textStart" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+                <!--social line travel-->
+                <View style="@style/Divider" />
+
+                <RelativeLayout
+                    android:id="@+id/travel_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="showDialog_social_travel">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/Travel"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:id="@+id/social_travel_choice"
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/none"
+                            android:textAlignment="textStart" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+                <!--social line travel-->
+                <View style="@style/Divider" />
+
+                <RelativeLayout
+                    android:id="@+id/interests_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="showDialog_social_interests">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/Interests"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:id="@+id/social_interests_choice"
+                            style="@style/title_social"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/none"
+                            android:textAlignment="textStart" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="end">
+                <TextView
+                    android:id="@+id/save_social"
+                    style="@style/title_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/done"
+                    android:textColor="@color/white"
+                    android:onClick="save_social"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:elevation="8dp"
+        android:background="@color/dark_grey"
+        android:padding="16dp">
+
+        <ImageButton
+            android:id="@+id/my_own_words_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="15dp"
+            android:background="@drawable/ic_baseline_edit_24"
+            android:onClick="showDialog_own_words_edit" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/dark_grey"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/title_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/words"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/profile_my_own_words"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/material_text"
+                style="@style/title_social"
+                android:padding="8dp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="end">
+                <TextView
+                    android:id="@+id/save_own"
+                    style="@style/title_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/done"
+                    android:textColor="@color/white"
+                    android:onClick="save_own_words"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

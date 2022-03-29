@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/background_profile"
+        android:background="@drawable/profile_bg">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:elevation="8dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:layout_marginTop="80dp"
+            app:cardCornerRadius="250dp">
+            <ImageView
+                android:id="@+id/gender_display"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_baseline_cancel_24"
+                android:padding="8dp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:elevation="8dp"
+            app:cardCornerRadius="250dp">
+            <ImageView
+                android:id="@+id/profile_display"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="centerCrop"
+                android:layout_margin="2dp" />
+
+        </com.google.android.material.card.MaterialCardView>
+        <TextView
+            android:id="@+id/display_name_visiting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            style="@style/title_social"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:text="Ambuj Singh"
+            android:layout_marginTop="150dp"/>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="50dp"
+            android:elevation="8dp"
+            android:layout_marginTop="80dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            app:cardCornerRadius="255dp">
+            <TextView
+                android:id="@+id/age_display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                style="@style/title_social"
+                android:text="23y"
+                android:textSize="15dp"
+
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:textAlignment="center"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </RelativeLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        style="@style/floating_action_button"
+        android:id="@+id/favourite_profile"
+        android:layout_marginTop="215dp"
+        app:backgroundTint="@color/PinkDark"
+        app:srcCompat="@drawable/ic_baseline_favorite_border_24"
+        app:tint="@color/white"
+        android:layout_marginStart="100dp"
+        android:layout_marginBottom="5dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:id="@+id/chat_profile"
+        app:backgroundTint="@color/PinkDark"
+        app:srcCompat="@drawable/ic_baseline_chat_24"
+        app:tint="@color/white"
+        android:layout_marginTop="215dp"
+        android:layout_gravity="end"
+        android:layout_marginEnd="100dp" />
+</FrameLayout>
