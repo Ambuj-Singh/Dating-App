@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "192217723035-9ol943ui4iubrbacld4emevrq2eg4u2d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dream.dating",
+            "certificate_hash": "77f2dd9eba6927834ddcae01adddeb0055dc8790"
+          }
+        },
+        {
           "client_id": "192217723035-7hr3fdgmjiog2pvebsfrhb1ufsagftnc.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -35,9 +35,9 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="170dp"
+            android:text="@string/detail_about"
             android:textAlignment="center"
-            android:textColor="@color/white"
-            android:text="@string/detail_about" />
+            android:textColor="@color/white" />
 
 
         <com.google.android.material.textfield.TextInputLayout

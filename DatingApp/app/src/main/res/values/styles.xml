@@ -103,11 +103,10 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="validating" parent="@style/Widget.MaterialComponents.ProgressIndicator.Circular.Indeterminate">
+    <style name="validating" parent="Widget.MaterialComponents.CircularProgressIndicator">
         <item name="android:indeterminateTint">@color/white</item>
     </style>
-
-    <style name="validating_black" parent="@style/Widget.MaterialComponents.ProgressIndicator.Circular.Indeterminate">
+    <style name="validating_black" parent="Widget.MaterialComponents.CircularProgressIndicator">
         <item name="android:indeterminateTint">@color/black</item>
     </style>
 

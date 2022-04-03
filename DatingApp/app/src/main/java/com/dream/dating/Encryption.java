@@ -1,11 +1,13 @@
 package com.dream.dating;
 
 import android.annotation.SuppressLint;
+import android.util.Base64;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-import android.util.Base64;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -36,6 +38,7 @@ public class Encryption {
             setKey(secret);
             @SuppressLint("GetInstance") Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+
                 return Base64.encodeToString(cipher.doFinal(strToEncrypt.getBytes(StandardCharsets.UTF_8)),Base64.DEFAULT);
 
         }

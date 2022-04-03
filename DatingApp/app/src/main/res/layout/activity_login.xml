@@ -67,8 +67,8 @@
             style="@style/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="335dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="335dp"
             android:clickable="true"
             android:focusable="true"
             android:text="@string/forgot" />
@@ -82,14 +82,13 @@
         android:layout_marginTop="400dp"
         android:text="@string/login" />
 
-    <ProgressBar
-        style="@style/validating"
-        android:id="@+id/pb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="405dp"
-        android:layout_centerHorizontal="true"
-        />
+        <ProgressBar
+            android:id="@+id/pb"
+            style="@style/validating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="405dp" />
 
     <TextView
         android:id="@+id/ques_reg"

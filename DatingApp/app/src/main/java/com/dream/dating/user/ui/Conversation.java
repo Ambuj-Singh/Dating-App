@@ -182,7 +182,6 @@ public class  Conversation extends AppCompatActivity {
     }
 
     private void createIdForNewMessage(Realm database, String to, String input_message, String from, Date date, String messageType, String messageStatus) {
-
         database.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -242,6 +241,7 @@ public class  Conversation extends AppCompatActivity {
             @Override
             public void onSuccess() {
               String encryptedText =  new Encryption().encrypt(messageServer,from+"_"+to+"_");
+                System.out.println(from+"_"+to+"_");
               sendToServer(encryptedText,id);
             }
         }, new Realm.Transaction.OnError() {

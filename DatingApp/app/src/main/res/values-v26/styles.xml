@@ -62,11 +62,14 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="validating" parent="@style/Widget.MaterialComponents.ProgressIndicator.Circular.Indeterminate">
+    <style name="validating" parent="@style/Widget.MaterialComponents.CircularProgressIndicator">
         <item name="android:indeterminateTint">@color/white</item>
+        <item name="android:indeterminate">true</item>
     </style>
-    <style name="validating_black" parent="@style/Widget.MaterialComponents.ProgressIndicator.Circular.Indeterminate">
+    <style name="validating_black" parent="@style/Widget.MaterialComponents.CircularProgressIndicator">
         <item name="android:indeterminateTint">@color/black</item>
+        <item name="android:indeterminate">true</item>
+
     </style>
 
     <style name="big_title" parent="TextAppearance.AppCompat">

@@ -8,7 +8,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -19,7 +20,8 @@
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme"
         tools:replace="android:label"
-        android:fullBackupContent="@xml/backup_descriptor">
+        android:fullBackupContent="@xml/backup_descriptor"
+        >
         <activity
             android:name=".account.AccountActivity"
             android:label="@string/title_activity_account"
@@ -37,7 +39,8 @@
         <activity android:name=".user.ui.UserProfile"
             android:screenOrientation="portrait"/>
         <activity android:name=".SignUp" />
-        <activity android:name=".Splash">
+        <activity android:name=".Splash"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
