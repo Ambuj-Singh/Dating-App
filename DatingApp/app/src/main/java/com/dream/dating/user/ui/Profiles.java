@@ -19,7 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -59,6 +59,7 @@ public class Profiles extends Fragment {
                              Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_profiles, container, false);
+
     }
 
     @Override
@@ -72,8 +73,10 @@ public class Profiles extends Fragment {
         ProgressBar progressBar =  progressDialog.findViewById(android.R.id.progress);
         progressBar.getIndeterminateDrawable().setTint(Color.rgb(98,0,238));
 
+
+
         recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2,GridLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         Query query = db.collection("users");
@@ -180,26 +183,26 @@ public class Profiles extends Fragment {
 
     //cardView
     public static class ProfileViewHolder extends RecyclerView.ViewHolder {
-        MaterialCardView materialCardView;
-        ImageView profile_pic;
-        TextView title, age, status;
-        Button profile_viewer;
+            MaterialCardView materialCardView;
+            ImageView profile_pic;
+            TextView title, age, status;
+            Button profile_viewer;
 
-        public ProfileViewHolder(View item) {
-            super(item);
-            materialCardView = item.findViewById(R.id.card);
-            profile_pic = item.findViewById(R.id.display_profile);
-            title = item.findViewById(R.id.user_name);
-            age = item.findViewById(R.id.age_view);
-            status = item.findViewById(R.id.User_status);
-            profile_viewer = item.findViewById(R.id.profileViewer);
+            public ProfileViewHolder(View item) {
+                super(item);
+                materialCardView = item.findViewById(R.id.card);
+                profile_pic = item.findViewById(R.id.display_profile);
+                title = item.findViewById(R.id.user_name);
+                age = item.findViewById(R.id.age_view);
+                status = item.findViewById(R.id.User_status);
+                profile_viewer = item.findViewById(R.id.profileViewer);
+            }
         }
-    }
 
 
-    @Override
-    public void onStart() {
-        super.onStart();
+        @Override
+        public void onStart() {
+            super.onStart();
         if (adapter != null) {
             adapter.startListening();
         }

@@ -8,7 +8,7 @@
     android:id="@+id/conversation_appbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/black">
+    android:background="@drawable/message_input_background">
    <com.google.android.material.appbar.MaterialToolbar
        android:id="@+id/conversation_toolbar"
        android:layout_width="match_parent"
@@ -70,14 +70,15 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_margin="8dp"/>
-      <include
-          android:id="@+id/message_input_layout"
-          layout="@layout/message_input"
-          android:layout_height="wrap_content"
-          android:layout_width="match_parent"
-          />
 
    </LinearLayout>
+   <include
+       android:id="@+id/message_input_layout"
+       layout="@layout/message_input"
+       android:layout_height="wrap_content"
+       android:layout_width="match_parent"
+       android:layout_alignParentBottom="true"
+       />
 
 </RelativeLayout>
 

@@ -4,5 +4,4 @@
     <gradient
         android:startColor="@color/sent_message"
         android:endColor="@color/received_message"/>
-    <corners android:radius="25dp"/>
 </shape>

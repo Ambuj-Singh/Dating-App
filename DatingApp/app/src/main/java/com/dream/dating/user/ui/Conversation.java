@@ -27,7 +27,6 @@ import com.dream.dating.user.UserModel.MessageModel;
 import com.dream.dating.user.UserModel.ReceiverModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -105,7 +104,7 @@ public class  Conversation extends AppCompatActivity {
         });
 
         //send message
-        FloatingActionButton sendMessage = findViewById(R.id.send_message);
+        ImageView sendMessage = findViewById(R.id.send_message);
         sendMessage.setOnClickListener(v -> {
             EditText message = findViewById(R.id.input_message_user);
             String input_message = message.getText().toString().trim();
