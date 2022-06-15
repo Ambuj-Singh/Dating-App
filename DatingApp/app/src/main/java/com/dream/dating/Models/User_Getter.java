@@ -1,4 +1,4 @@
-package com.dream.dating.user.UserModel;
+package com.dream.dating.Models;
 
 import com.google.firebase.firestore.IgnoreExtraProperties;
 
