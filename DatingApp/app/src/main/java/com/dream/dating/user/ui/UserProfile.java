@@ -38,6 +38,7 @@ import com.dream.dating.ProfileInfoGrabber;
 import com.dream.dating.R;
 import com.dream.dating.Services.DataContext;
 import com.dream.dating.Tools;
+import com.dream.dating.account.AccountActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.chip.Chip;
@@ -192,6 +193,13 @@ public class UserProfile extends AppCompatActivity {
             }
         });
 
+        //back button for user own profile
+        FloatingActionButton profileUserBack = findViewById(R.id.profile_user_back);
+        profileUserBack.setOnClickListener(v -> {
+            Intent i = new Intent(this, AccountActivity.class);
+            startActivity(i);
+            finish();
+        });
         //favourite action
 
             fab_favourite.setOnClickListener(new View.OnClickListener() {
@@ -243,17 +251,14 @@ public class UserProfile extends AppCompatActivity {
                 ProgressBar progressBar = progressDialog.findViewById(android.R.id.progress);
                 progressBar.getIndeterminateDrawable().setTint(Color.rgb(98,0,238));
 
-                getUserInfo(df_user, new ChatCallback() {
-                    @Override
-                    public void onCallback(UserInfo userInfo) {
-                        dataContext.insertUser(userInfo);
-                        Intent i = new Intent(UserProfile.this,Conversation.class);
-                        i.putExtra("uid",uid);
-                        startActivity(i);
-                    }
+                getUserInfo(df_user, userInfo -> {
+                    dataContext.insertUser(userInfo);
+                    progressDialog.cancel();
+                    Toast.makeText(UserProfile.this, "Friend Added", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(UserProfile.this,Conversation.class);
+                    i.putExtra("uid",uid);
+                    startActivity(i);
                 });
-
-
             }
         });
     }

@@ -1,10 +1,13 @@
 package com.dream.dating.account;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,8 +20,10 @@ import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
+import com.bumptech.glide.Glide;
 import com.dream.dating.ProfileInfoGrabber;
 import com.dream.dating.R;
+import com.dream.dating.Services.DataContext;
 import com.dream.dating.Status_Offline;
 import com.dream.dating.Status_Online;
 import com.dream.dating.user.ui.UserProfile;
@@ -36,8 +41,9 @@ public class AccountActivity extends AppCompatActivity {
     private OneTimeWorkRequest oneTimeWorkRequestA, oneTimeWorkRequestB;
     private ImageView profile_image;
     private TextView username;
-    private TextView looking_for;
+    private TextView name;
     private DocumentReference df_user;
+    private DataContext datacontext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,15 +54,37 @@ public class AccountActivity extends AppCompatActivity {
         df_user = firebaseFirestore.collection("users").document(UserUID);
         profile_image = findViewById(R.id.imageView_profile_pic);
         username = findViewById(R.id.username_nav_view);
-        looking_for = findViewById(R.id.looking_for_nav);
+        name = findViewById(R.id.name_nav_view);
 
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.create();
+        progressDialog.show();
+        ProgressBar progressBar = progressDialog.findViewById(android.R.id.progress);
+        progressBar.getIndeterminateDrawable().setTint(Color.rgb(98,0,238));
+
+        datacontext = new DataContext(this);
+        String usernameText = "@"+datacontext.getUsername();
+        String nameText = datacontext.getName();
+        username.setText(usernameText);
+        name.setText(nameText);
+
+        fetchUserData(df_user, new waitTillResults() {
+            @Override
+            public void Callback(ProfileInfoGrabber grabber) {
+
+                Glide.with(getApplicationContext())
+                        .load(grabber.getProfileURL())
+                        .circleCrop()
+                        .into(profile_image);
+            }
+        });
 
     }
 
 
-
     private interface waitTillResults{
-        void Callback(String dp,String username,String looking_for);
+        void Callback(ProfileInfoGrabber grabber);
     }
 
     private void fetchUserData(DocumentReference df_user, final waitTillResults onCallback) {
@@ -66,9 +94,7 @@ public class AccountActivity extends AppCompatActivity {
                 if (documentSnapshot != null) {
                     ProfileInfoGrabber getter = documentSnapshot.toObject(ProfileInfoGrabber.class);
                     if (getter != null) {
-                        String username = getter.getusername();
-
-                        String dp = getter.getProfileURL();
+                        onCallback.Callback(getter);
                     }
                 }
             }

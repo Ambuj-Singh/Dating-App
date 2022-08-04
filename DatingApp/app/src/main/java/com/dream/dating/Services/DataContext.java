@@ -32,7 +32,7 @@ public class DataContext extends SQLiteOpenHelper {
         String table_friends = "create table if not exists Friends" +
                 "(id integer primary key autoincrement,Username text, Name text, Image text, message text, timestamp integer, age integer, uid text, counter integer, status integer);";
         String table_messages = "create table if not exists message_table (id integer primary key autoincrement,sender text, receiver text, imagePath text, message text, timestamp integer, filePath text, read integer, delivery integer);";
-        String username = "create table if not exists username(username text, uid text, image text);";
+        String username = "create table if not exists username(username text, uid text, image text, name text);";
         sqLiteDatabase.execSQL(username);
         sqLiteDatabase.execSQL(table_friends);
         sqLiteDatabase.execSQL(table_messages);
@@ -381,6 +381,20 @@ public class DataContext extends SQLiteOpenHelper {
             username = cursor.getString(0);
         }
         return username;
+
+    }
+
+    public String getName(){
+        String query = "select name from username;";
+        String name = "none";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor.getCount()>0) {
+            cursor.moveToFirst();
+
+            name = cursor.getString(0);
+        }
+        return name;
 
     }
 

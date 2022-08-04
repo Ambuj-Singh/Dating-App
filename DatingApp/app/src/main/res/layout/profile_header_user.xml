@@ -101,6 +101,7 @@
 
     </RelativeLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/profile_user_back"
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:layout_gravity="center_horizontal"
