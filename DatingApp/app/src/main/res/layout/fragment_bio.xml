@@ -6,72 +6,82 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".user.Profile_Frags.Bio">
+
     <RelativeLayout
-        android:id="@+id/page3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="375dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/aboutProgress"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/pages" />
-
-        <TextView
-            style="@style/Title_black"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp"
-            android:textAlignment="center"
-            android:text="@string/About"
-            android:textColor="@color/colorPrimary"/>
-
-        <TextView
-            style="@style/big_title_black"
-            android:layout_width="290dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="170dp"
-            android:text="@string/detail_about"
-            android:textAlignment="center"
-            android:textColor="@color/white" />
+            android:indeterminate="true"
+            app:trackColor="@color/white"
+            android:layout_alignTop="@+id/page4"/>
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_about_me"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="310dp"
-            android:hint="@string/AboutMe"
-            android:textColorHint="@color/gray"
-            app:counterEnabled="true"
-            app:counterMaxLength="100"
-            app:counterTextColor="@color/white"
-            app:errorEnabled="false">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/about_me"
+        <LinearLayout
+            android:id="@+id/page4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:fontFamily="@font/mons_reg"
+                android:padding="8dp"
+                android:text="@string/About"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:fontFamily="@font/rubik_regular"
-                android:inputType="textAutoCorrect|textMultiLine"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                android:text="@string/detail_about"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
 
-        <Button
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_about_me"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:hint="@string/AboutMe"
+                android:padding="8dp"
+                android:textColorHint="@color/gray"
+                app:counterEnabled="true"
+                app:counterMaxLength="100"
+                app:counterTextColor="@color/gray"
+                app:errorEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/about_me"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_regular"
+                    android:inputType="textAutoCorrect|textMultiLine"
+                    android:textColor="@color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/bio_saver"
             style="@style/colored_custom_butt_transparent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/next"
-            android:textColor="@color/colorPrimary"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="450dp"
-            />
+            android:layout_alignEnd="@+id/page4"
+            android:layout_alignBottom="@+id/page4"
+            android:layout_gravity="end|bottom"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_baseline_chevron_right_24"
+            app:tint="@color/white" />
     </RelativeLayout>
 </FrameLayout>

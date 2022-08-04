@@ -3,179 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/drawable/attachment_background.xml" value="0.217" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/drawable/background_text_convo.xml" value="0.217" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/drawable/circular_image.xml" value="0.217" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/drawable/circular_image_button.xml" value="0.219" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/drawable/empty_circle.xml" value="0.219" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.219" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/drawable/ic_baseline_add_to_home_screen_24.xml" value="0.219" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/drawable/ic_baseline_adjust_24.xml" value="0.219" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/drawable/ic_baseline_attach_file_24.xml" value="0.219" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/drawable/ic_baseline_block_24.xml" value="0.219" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/drawable/ic_baseline_chat_24.xml" value="0.219" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/drawable/ic_baseline_check_grey_24.xml" value="0.219" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/drawable/ic_baseline_chevron_left_24.xml" value="0.219" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/drawable/ic_baseline_delete_outline_24.xml" value="0.219" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/activity_account.xml" value="0.264" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/activity_login.xml" value="0.264" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/activity_profile_maker.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/activity_sign_up.xml" value="0.264" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/activity_splash.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/activity_user.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/activity_user_profile.xml" value="0.4" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/attachments.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/chat_list_view.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/conversation.xml" value="0.264" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/dialog_chip_group.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/fragment_about_us.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/fragment_bio.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/fragment_chat.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/fragment_fav.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/fragment_feedback.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/fragment_gallery.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/fragment_logout.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/fragment_privacy.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/fragment_profile_picupload.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/fragment_profiles.xml" value="0.4" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/fragment_settings.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/fragment_upgrade.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/fragment_visited.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/fragment_welcome.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/gender_dialog.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/input.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/input_string.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/item_selection_chip.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/lower_banner_anchat.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/menu_container.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/message_input.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/nav_header_main.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/pic_upload_dialog.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/profile_cards.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/profile_header_user.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/profile_header_visiting.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/progress.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/received_message.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/sent_message.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/layout/slider_social_dots_dialog.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/menu/account.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/menu/activity_main_drawer.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/menu/search_profiles.xml" value="0.21770833333333334" />
-        <entry key="..\:/Android_Projects/DatingApp/app/src/main/res/menu/toolbar_menu.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/attachment_background.xml" value="0.1325" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/background_text_convo.xml" value="0.1325" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/circular_image.xml" value="0.159" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/circular_image_button.xml" value="0.1325" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/circular_image_online.xml" value="0.1745" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/empty_circle.xml" value="0.1325" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/favrouite_anime.xml" value="0.1325" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.1325" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/ic_baseline_add_to_home_screen_24.xml" value="0.1325" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/ic_baseline_adjust_24.xml" value="0.1325" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/ic_baseline_attach_file_24.xml" value="0.1325" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/ic_baseline_book_24.xml" value="0.1325" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/ic_baseline_check_grey_24.xml" value="0.1325" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/ic_baseline_chevron_left_24.xml" value="0.1325" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/ic_baseline_delete_outline_24.xml" value="0.1325" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/ic_baseline_done_grey_outline_24.xml" value="0.1325" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/ic_baseline_done_outline_24.xml" value="0.1325" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/ic_baseline_exit_to_app_24.xml" value="0.1325" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/ic_baseline_menu_white_24.xml" value="0.1475" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/ic_baseline_photo_library_24.xml" value="0.173" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/message_counter.xml" value="0.159" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/message_input_background.xml" value="0.1475" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/online_dot.xml" value="0.1745" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/profile_online.xml" value="0.159" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/received.xml" value="0.173" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/drawable/sent.xml" value="0.173" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/activity_account.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/activity_login.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/activity_profile_maker.xml" value="0.16770833333333332" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/activity_sign_up.xml" value="0.16770833333333332" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/activity_splash.xml" value="0.16770833333333332" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/activity_user.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/activity_user_profile.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/attachments.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/chat_list_view.xml" value="0.176" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/conversation.xml" value="0.264" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/dialog_chip_group.xml" value="0.16770833333333332" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/fragment_about_us.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/fragment_bio.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/fragment_chat.xml" value="0.16770833333333332" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/fragment_fav.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/fragment_feedback.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/fragment_gallery.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/fragment_profiles.xml" value="0.11018518518518519" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/input.xml" value="0.16770833333333332" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/input_string.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/item_selection_chip.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/lower_banner_anchat.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/menu_container.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/message_input.xml" value="0.1" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/nav_header_main.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/pic_upload_dialog.xml" value="0.16770833333333332" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/profile_cards.xml" value="0.16770833333333332" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/profile_header_user.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/profile_header_visiting.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/progress.xml" value="0.16770833333333332" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/received_message.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/sent_message.xml" value="0.16770833333333332" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/slider_social_dots_dialog.xml" value="0.16770833333333332" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/menu/account.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/menu/activity_main_drawer.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/menu/search_profiles.xml" value="0.21770833333333334" />
-        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/menu/toolbar_menu.xml" value="0.21770833333333334" />
+        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/activity_login.xml" value="0.221875" />
+        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/activity_user.xml" value="0.221875" />
+        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/fragment_about_us.xml" value="0.221875" />
+        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/fragment_bio.xml" value="0.221875" />
+        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/fragment_feedback.xml" value="0.221875" />
+        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/fragment_gallery.xml" value="0.221875" />
+        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/fragment_gender_selection.xml" value="0.221875" />
+        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/fragment_name_frg.xml" value="0.221875" />
+        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/fragment_profile_picupload.xml" value="0.221875" />
+        <entry key="..\:/Projects/Dating App/DatingApp/app/src/main/res/layout/fragment_welcome.xml" value="0.264" />
       </map>
     </option>
   </component>
-  <component name="NullableNotNullManager">
-    <option name="myDefaultNullable" value="org.jetbrains.annotations.Nullable" />
-    <option name="myDefaultNotNull" value="androidx.annotation.NonNull" />
-    <option name="myNullables">
-      <value>
-        <list size="15">
-          <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
-          <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
-          <item index="2" class="java.lang.String" itemvalue="javax.annotation.CheckForNull" />
-          <item index="3" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.Nullable" />
-          <item index="4" class="java.lang.String" itemvalue="android.support.annotation.Nullable" />
-          <item index="5" class="java.lang.String" itemvalue="androidx.annotation.Nullable" />
-          <item index="6" class="java.lang.String" itemvalue="android.annotation.Nullable" />
-          <item index="7" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNullable" />
-          <item index="8" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.Nullable" />
-          <item index="9" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableDecl" />
-          <item index="10" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableType" />
-          <item index="11" class="java.lang.String" itemvalue="com.android.annotations.Nullable" />
-          <item index="12" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.Nullable" />
-          <item index="13" class="java.lang.String" itemvalue="io.reactivex.annotations.Nullable" />
-          <item index="14" class="java.lang.String" itemvalue="io.reactivex.rxjava3.annotations.Nullable" />
-        </list>
-      </value>
-    </option>
-    <option name="myNotNulls">
-      <value>
-        <list size="14">
-          <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
-          <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
-          <item index="2" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />
-          <item index="3" class="java.lang.String" itemvalue="android.support.annotation.NonNull" />
-          <item index="4" class="java.lang.String" itemvalue="androidx.annotation.NonNull" />
-          <item index="5" class="java.lang.String" itemvalue="android.annotation.NonNull" />
-          <item index="6" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNonNull" />
-          <item index="7" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.NonNull" />
-          <item index="8" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullDecl" />
-          <item index="9" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullType" />
-          <item index="10" class="java.lang.String" itemvalue="com.android.annotations.NonNull" />
-          <item index="11" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.NonNull" />
-          <item index="12" class="java.lang.String" itemvalue="io.reactivex.annotations.NonNull" />
-          <item index="13" class="java.lang.String" itemvalue="io.reactivex.rxjava3.annotations.NonNull" />
-        </list>
-      </value>
-    </option>
-  </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

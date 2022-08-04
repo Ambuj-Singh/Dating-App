@@ -11,14 +11,14 @@ import com.google.android.material.card.MaterialCardView;
 
 
 //ViewHolder of FriendsList
-public class FriendsListViewModel extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class FriendsListViewModel extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener{
     MaterialCardView materialCardView;
     ImageView profile_pic;
     TextView title, message_view, time, messageCounter, readStatus;
     ImageView onlineOffline;
-    FriendListAdapter.Interaction interaction;
+    FriendsListAdapter.Interaction interaction;
 
-    FriendsListViewModel(View item, FriendListAdapter.Interaction interaction) {
+    FriendsListViewModel(View item, FriendsListAdapter.Interaction interaction) {
         super(item);
         materialCardView = item.findViewById(R.id.friends_list_card);
         profile_pic = item.findViewById(R.id.profile_display_friend_list);
@@ -34,5 +34,12 @@ public class FriendsListViewModel extends RecyclerView.ViewHolder implements Vie
     @Override
     public void onClick(View view) {
         interaction.onChatClicked(getBindingAdapterPosition());
+    }
+
+
+    @Override
+    public boolean onLongClick(View view) {
+        interaction.onChatLongClicked(getBindingAdapterPosition());
+        return false;
     }
 }

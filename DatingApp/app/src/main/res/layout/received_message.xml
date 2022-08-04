@@ -9,7 +9,7 @@
             android:layout_height="wrap_content"
             android:padding="1dp"
             android:layout_gravity="start"
-            android:background="@drawable/received"
+            android:background="@drawable/received_box"
             android:orientation="vertical">
 
             <!-- Media -->

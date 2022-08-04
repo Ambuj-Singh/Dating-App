@@ -32,18 +32,6 @@
         </item>
     </style>
 
-
-    <style name="TextAppearance.AppCompat.Notification.Title" parent="TextAppearance.Compat.Notification.Title"></style>
-
-    <style name="TextAppearance.AppCompat.Notification.Time" parent="TextAppearance.Compat.Notification.Time"></style>
-
-    <style name="TextAppearance.AppCompat.Notification.Info" parent="TextAppearance.Compat.Notification.Info"></style>
-
-    <style name="MyDarkToolbarStyle" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:background">@color/black</item>
-        <item name="android:colorBackground">@color/black</item>
-    </style>
-
     <style name="floating_action_button" parent="Widget.Design.FloatingActionButton">
         <item name="android:background">@drawable/attachment_background</item>
     </style>
@@ -104,7 +92,7 @@
     </style>
 
     <style name="validating" parent="Widget.MaterialComponents.CircularProgressIndicator">
-        <item name="android:indeterminateTint">@color/white</item>
+        <item name="android:indeterminateTint">@color/colorAccent</item>
     </style>
     <style name="validating_black" parent="Widget.MaterialComponents.CircularProgressIndicator">
         <item name="android:indeterminateTint">@color/black</item>

@@ -3,6 +3,7 @@ package com.dream.dating;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,8 +18,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dream.dating.Services.DataContext;
 import com.dream.dating.user.ProfileMaker;
-import com.dream.dating.user.UserActivity;
+import com.dream.dating.user.ui.UserActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -42,24 +44,26 @@ import java.util.Objects;
 
 public class Login extends AppCompatActivity {
 
-    protected Button signUp,login;
+    private Button signUp,login;
     private EditText email,password;
-    protected TextView forgot_password;
+    private TextView forgot_password;
     private FirebaseAuth mAuth;
     private String email_i,password_i;
     private TextInputLayout til_email_lg, til_password_lg;
     private ProgressBar pb;
-    protected static boolean REQUEST_DENIED = false, REQUEST_ACCEPTED = true;
-    protected boolean flag;
-    protected DocumentReference df;
-    protected CollectionReference collectionReference;
-
+    private static boolean REQUEST_DENIED = false, REQUEST_ACCEPTED = true;
+    private boolean flag;
+    private String username;
+    private DocumentReference df;
+    private CollectionReference collectionReference;
+    private DataContext dataContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        dataContext = new DataContext(this);
         signUp = findViewById(R.id.sign_up);
         login = findViewById(R.id.login);
         email = findViewById(R.id.l_email);
@@ -111,9 +115,11 @@ public class Login extends AppCompatActivity {
                                 assert currentUser != null;
 
                                 df = collectionReference.document(currentUser.getUid());
+                                String uidUser = currentUser.getUid();
 
-                                getWelcomeFlag(df, value -> {
+                                getWelcomeFlag(df, (value, value2) -> {
 
+                                    saveToLocalDB(uidUser,username);
                                     if(value) {
 
                                         Intent i = new Intent(Login.this, UserActivity.class);
@@ -217,6 +223,12 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    private void saveToLocalDB(String uid, String username) {
+        SQLiteDatabase sqLiteDatabase = dataContext.getWritableDatabase();
+        String insert = "insert into username(username, uid) values('"+username+"', '"+uid+"');";
+        sqLiteDatabase.execSQL(insert);
+    }
+
     private void createFolderStructure() {
 
         ArrayList<String> folder = new ArrayList<>();
@@ -224,14 +236,14 @@ public class Login extends AppCompatActivity {
         folder.add("Databases");
         folder.add("Media");
         folder.add("Media/Wallpaper");
-        folder.add("Media/DD Animated Gifs");
-        folder.add("Media/DD Audio");
-        folder.add("Media/DD Documents");
-        folder.add("Media/DD Images");
-        folder.add("Media/DD Profile Photos");
-        folder.add("Media/DD Stickers");
-        folder.add("Media/DD Video");
-        folder.add("Media/DD Voice Notes");
+        folder.add("Media/DDAnimatedGifs");
+        folder.add("Media/DDAudio");
+        folder.add("Media/DDocuments");
+        folder.add("Media/DDImages");
+        folder.add("Media/DDProfilePhotos");
+        folder.add("Media/DDStickers");
+        folder.add("Media/DDVideo");
+        folder.add("Media/DDVoiceNotes");
 
         for(String path : folder){
            File Folder = new File(this.getFilesDir().getAbsolutePath()+File.separator+"DreamDating/"+path);
@@ -264,18 +276,26 @@ public class Login extends AppCompatActivity {
         til_password_lg.setError(null);
     }
     private interface WelcomeUser {
-        void CallBack(boolean value);
+        void CallBack(boolean value, String username);
     }
 
     public void getWelcomeFlag(DocumentReference df, final WelcomeUser callback) {
         df.get().addOnSuccessListener(documentSnapshot -> {
-            if (documentSnapshot.getBoolean("Welcome") != null) {
-                flag = documentSnapshot.getBoolean("Welcome") != null;
+            try {
+                username = documentSnapshot.getString("username");
+                if (documentSnapshot.getBoolean("Welcome") != null)
+                    flag = Boolean.TRUE.equals(documentSnapshot.getBoolean("Welcome"));
+                 else
+                    flag = false;
+
+                callback.CallBack(flag,username);
             }
-            else {
-                flag = false;
+            catch (Exception e){
+                Log.i("network", "Interrupted");
             }
-            callback.CallBack(flag);
         }).addOnFailureListener(e -> Log.i("network", "Interrupted"));
     }
+
+
+
 }

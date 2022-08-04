@@ -7,79 +7,78 @@
     android:layout_height="match_parent"
     tools:context=".user.Profile_Frags.ProfilePicUpload">
     <RelativeLayout
-        android:id="@+id/page2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/linearPb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:trackColor="@color/white"
+            android:layout_alignTop="@+id/page3"/>
+
+
+        <LinearLayout
+            android:id="@+id/page3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:fontFamily="@font/mons_reg"
+                android:padding="8dp"
+                android:text="@string/profile_picture"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:fontFamily="@font/mons_reg"
+                android:padding="8dp"
+                android:text="@string/profile_pic"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+
+            <ImageView
+                android:id="@+id/displayPic"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="42dp"
+                android:src="@drawable/ic_baseline_camera_alt_24_alpha"
+                app:tint="@color/black" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <Button
+                    android:id="@+id/upload2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/upload" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/next2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
-
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="375dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/pages" />
-
-        <ImageView
-            android:id="@+id/displayPic"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp"
-            android:src="@drawable/ic_baseline_person_24"
-            app:tint="@color/white"
-            />
-        <ProgressBar
-            android:id="@+id/linearPb"
-            style="@style/validating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="280dp"
-            />
-        <ImageView
-            android:id="@+id/checked"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_check_black_24dp"
-            android:layout_marginTop="295dp"
-            />
-
-        <Button
-            android:id="@+id/upload2"
-            style="@style/colored_custom_butt_transparent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/upload"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="280dp"
-            android:textColor="@color/colorPrimary"
-            />
-
-        <TextView
-            style="@style/big_title_black"
-            android:layout_width="225dp"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="335dp"
-            android:fontFamily="@font/mons_reg"
-            android:textSize="20dp"
-            android:textColor="@color/white"
-            android:text="@string/profile_pic" />
-
-
-        <Button
-            android:id="@+id/next2"
-            style="@style/colored_custom_butt_transparent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/next"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="450dp"
-            android:textColor="@color/colorPrimary"
-            />
+        android:src="@drawable/ic_baseline_chevron_right_24"
+        app:tint="@color/white"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:layout_alignEnd="@id/page3"
+        android:layout_alignBottom="@+id/page3"
+        />
     </RelativeLayout>
-
 </FrameLayout>

@@ -23,17 +23,16 @@ public class DataContext extends SQLiteOpenHelper {
 
 
     public DataContext(@Nullable Context context) {
-        super(context, "Senpai.db", null, 2);
+        super(context, "DatingMe.db", null, 2);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
         String table_friends = "create table if not exists Friends" +
-                "(id integer primary key autoincrement,Username text, Name text, Image text, message text, timestamp integer, age integer, uid text, counter integer);";
+                "(id integer primary key autoincrement,Username text, Name text, Image text, message text, timestamp integer, age integer, uid text, counter integer, status integer);";
         String table_messages = "create table if not exists message_table (id integer primary key autoincrement,sender text, receiver text, imagePath text, message text, timestamp integer, filePath text, read integer, delivery integer);";
-        String username = "create table if not exists username(username text, uid text);";
-
+        String username = "create table if not exists username(username text, uid text, image text);";
         sqLiteDatabase.execSQL(username);
         sqLiteDatabase.execSQL(table_friends);
         sqLiteDatabase.execSQL(table_messages);
@@ -130,8 +129,8 @@ public class DataContext extends SQLiteOpenHelper {
                 messageModelList.add(messageModel);
                 cursor.moveToNext();
             }
-            for (MessageModel messageModel1 : messageModelList)
-                Log.i("select",messageModel1.getMessage());
+        /*    for (MessageModel messageModel1 : messageModelList)
+                Log.i("select",messageModel1.getMessage());*/
             cursor.close();
             return messageModelList;
         }
@@ -154,6 +153,7 @@ public class DataContext extends SQLiteOpenHelper {
             values.put("timestamp", user.getTimestamp());
             values.put("age", user.getAge());
             values.put("uid", user.getUID());
+            values.put("status", Tools.integerToBoolean(user.getUserStatus()));
 
             db.insert("Friends", null, values);
             db.close();
@@ -161,6 +161,26 @@ public class DataContext extends SQLiteOpenHelper {
         }
         else
             return false;
+    }
+
+    public void updateUserDisplayImage(String path, String username){
+        try{
+            String UpdateStatus = "update Friends set Image = '"+ path +"' where (Username = '" + username + "');";
+            this.getWritableDatabase().execSQL(UpdateStatus);
+        }
+        catch (Exception e) {
+            Log.i("updateStatus()", e.getMessage());
+        }
+    }
+
+    public void updateUserStatus(String username, boolean status){
+        try{
+                String UpdateStatus = "update Friends set status = " + Tools.booleanToInteger(status) + " where (Username = '" + username + "');";
+                this.getWritableDatabase().execSQL(UpdateStatus);
+            }
+        catch (Exception e) {
+            Log.i("updateStatus()", e.getMessage());
+        }
     }
 
     public void updateMessageCounter(String username){
@@ -176,7 +196,8 @@ public class DataContext extends SQLiteOpenHelper {
             if(cursor.moveToFirst()){
                 Log.i("MessageCounter",String.valueOf(cursor.getInt(0)));
                 db1 = getWritableDatabase();
-                String updateMessageCounter = "update Friends set counter = "+cursor.getInt(0)+" where ( Username = '"+username+"');";
+                String update = "update Friends set counter = "+cursor.getInt(0)+" where ( Username = '"+username+"');";
+                db1.execSQL(update);
             }
         }
         catch (Exception e){
@@ -335,6 +356,15 @@ public class DataContext extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(update_timestamp_user);
     }
 
+    public void updateLatestMessage(String username, String message){
+
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        String update_timestamp_user = "update Friends set message = '"+message+"' where ( Username = '"+username+"');";
+
+        sqLiteDatabase.execSQL(update_timestamp_user);
+    }
+
     public void setDeliveryUpdate(MessageModel messageModel, boolean value) {
         String query = "update message_table set delivery = "+ Tools.booleanToInteger(value)+" where timestamp = "+messageModel.getTimestamp()+";";
         this.getWritableDatabase().execSQL(query);
@@ -395,6 +425,14 @@ public class DataContext extends SQLiteOpenHelper {
         Log.i("deleteConvo",deleteConversationQuery);
         getWritableDatabase().execSQL(deleteConversationQuery);
     }
+
+    public void updateProfilePic(String path) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String update_profile = "update username set image ='"+path+"';";
+        sqLiteDatabase.execSQL(update_profile);
+    }
+
+
 
     /*public void setKeysAndRegistrationId(IdentityKeyPair identityKeyPair, int id, int registrationId, String signedPreKeyPublicKey, String signedPreKeyRecordSignature){
 

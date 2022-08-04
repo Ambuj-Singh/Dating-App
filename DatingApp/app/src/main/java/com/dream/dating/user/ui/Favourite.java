@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -43,7 +42,7 @@ public class Favourite extends Fragment {
     private RecyclerView recyclerView;
     private FirebaseFirestore db;
     private FirestoreRecyclerAdapter adapter;
-    private ProgressDialog progressDialog;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,19 +117,19 @@ public class Favourite extends Fragment {
             @Override
             protected void onBindViewHolder(@NonNull FavouriteViewHolder holder, int position, final ProfileInfoGrabber model) {
                 holder.title.setText(String.valueOf(model.getusername()));
-                holder.age.setText(model.getAge() +" | ");
+                holder.age.setText(String.valueOf(model.getAge()));
 
                 //setting user status on data change
                 if(model.getUserStatus()){
-                    setOnline(holder.status);
+                  holder.status.setVisibility(View.VISIBLE);
                 }
                 else{
-                    setOffline(holder.status);
+                   holder.status.setVisibility(View.INVISIBLE);
                 }
                 Glide.with(getContext())
                         .load(String.valueOf(model.getProfileURL()))
                         .into(holder.profile_pic);
-                holder.profile_viewer.setOnClickListener(new View.OnClickListener() {
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent i = new Intent(getContext(),UserProfile.class);
@@ -165,9 +164,8 @@ public class Favourite extends Fragment {
     //cardView
     private static class FavouriteViewHolder extends RecyclerView.ViewHolder {
         MaterialCardView materialCardView;
-        ImageView profile_pic;
-        TextView title, age, status;
-        Button profile_viewer;
+        ImageView profile_pic,status;
+        TextView title, age ;
 
         public FavouriteViewHolder(View item) {
             super(item);
@@ -176,7 +174,6 @@ public class Favourite extends Fragment {
             title = item.findViewById(R.id.user_name);
             age = item.findViewById(R.id.age_view);
             status = item.findViewById(R.id.User_status);
-            profile_viewer = item.findViewById(R.id.profileViewer);
         }
     }
 

@@ -63,7 +63,7 @@
     </style>
 
     <style name="validating" parent="@style/Widget.MaterialComponents.CircularProgressIndicator">
-        <item name="android:indeterminateTint">@color/white</item>
+        <item name="android:indeterminateTint">@color/colorAccent</item>
         <item name="android:indeterminate">true</item>
     </style>
     <style name="validating_black" parent="@style/Widget.MaterialComponents.CircularProgressIndicator">

@@ -39,6 +39,8 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:scaleType="centerCrop"
+                android:padding="20dp"
+                android:src="@drawable/ic_baseline_camera_alt_24_alpha"
                 android:layout_margin="2dp" />
 
         </com.google.android.material.card.MaterialCardView>
@@ -50,7 +52,7 @@
             style="@style/title_social"
             android:padding="10dp"
             android:textColor="@color/white"
-            android:text="Ambuj Singh"
+            android:text="@string/dev_name"
             android:layout_marginTop="150dp"/>
         <com.google.android.material.card.MaterialCardView
             android:layout_width="50dp"
@@ -67,9 +69,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimaryDark"
                 style="@style/title_social"
-                android:text="23y"
-                android:textSize="15dp"
-
+                android:text="@string/dev_age"
+                android:textSize="15sp"
                 android:layout_gravity="center"
                 android:textColor="@color/white"
                 android:textAlignment="center"/>
@@ -82,6 +83,7 @@
         android:layout_width="55dp"
         android:layout_height="55dp"
         style="@style/floating_action_button"
+        android:contentDescription="@string/fav_button_decrip"
         android:id="@+id/favourite_profile"
         android:layout_marginTop="215dp"
         app:backgroundTint="@color/PinkDark"
@@ -91,13 +93,15 @@
         android:layout_marginBottom="5dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/chat_profile"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:id="@+id/chat_profile"
+        android:layout_marginTop="215dp"
+        android:layout_gravity="end"
+        android:layout_marginEnd="100dp"
+        android:contentDescription="@string/chatButtonDescrip"
         app:backgroundTint="@color/PinkDark"
         app:srcCompat="@drawable/ic_baseline_chat_24"
         app:tint="@color/white"
-        android:layout_marginTop="215dp"
-        android:layout_gravity="end"
-        android:layout_marginEnd="100dp" />
+    />
 </FrameLayout>

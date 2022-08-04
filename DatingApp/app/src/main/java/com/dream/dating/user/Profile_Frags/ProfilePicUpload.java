@@ -25,6 +25,7 @@ import com.bumptech.glide.Glide;
 import com.dream.dating.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -44,7 +45,7 @@ public class ProfilePicUpload extends Fragment {
     private static final int PERMISSION_STORAGE_GRANTED = 1;
     private String path;
     private ImageView dp;
-    private Button next2;
+    private FloatingActionButton next2;
     private ProgressBar progressBar;
     private ImageView check;
 
@@ -80,12 +81,13 @@ public class ProfilePicUpload extends Fragment {
         dp = view.findViewById(R.id.displayPic);
         check = view.findViewById(R.id.checked);
         check.setVisibility(View.INVISIBLE);
+
         upload2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                upload2.setVisibility(View.INVISIBLE);
+                upload2.setEnabled(false);
                 next2.setEnabled(false);
-                next2.setTextColor(getResources().getColor(R.color.gray,null));
+                next2.setBackgroundColor(getResources().getColor(R.color.gray,null));
                 getStoragePermission();
             }
         });
@@ -182,11 +184,11 @@ public class ProfilePicUpload extends Fragment {
                   public void onSuccess(Uri uri) {
                       saveDownloadLink(uri.toString());
                       next2.setEnabled(true);
-                      next2.setTextColor(getResources().getColor(R.color.BlueTone,null));
+                      next2.setBackgroundColor(getResources().getColor(R.color.colorAccent,null));
 
                       progressBar.setVisibility(View.INVISIBLE);
                       setProfilePic(uri.toString());
-                      check.setVisibility(View.VISIBLE);
+
                   }
               }).addOnFailureListener(new OnFailureListener() {
                   @Override
@@ -216,6 +218,7 @@ public class ProfilePicUpload extends Fragment {
 
         Map<String,Object> url = new HashMap<>();
         url.put("ProfileURL",download);
+        url.put("WelcomeStage","dp");
 
         collectionReference.document(uid).update(url).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

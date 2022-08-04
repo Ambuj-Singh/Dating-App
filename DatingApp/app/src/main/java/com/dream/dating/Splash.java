@@ -10,9 +10,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
 import com.dream.dating.user.ProfileMaker;
-import com.dream.dating.user.UserActivity;
+import com.dream.dating.user.ui.UserActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -51,11 +50,7 @@ public class Splash extends AppCompatActivity {
         }
 
 
-        logo = findViewById(R.id.logo_view);
 
-        Glide.with(this)
-                .load(R.raw.logo_anime_2)
-                .into(logo);
 
         new Handler().postDelayed(new Runnable() {
             @Override

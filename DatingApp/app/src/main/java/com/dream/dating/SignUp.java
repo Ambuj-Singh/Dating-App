@@ -8,7 +8,6 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -48,9 +47,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TimeZone;
-
-import static org.threeten.bp.Period.between;
 
 
 public class SignUp extends AppCompatActivity {
@@ -194,7 +192,7 @@ public class SignUp extends AppCompatActivity {
 
     private boolean checkAllEntries(String pass,String c_pass){
         removeError();
-        if(!isEmail(Email))
+        if(!Tools.isEmail(Email))
         {
           til_email.setError("Invalid Email");
 
@@ -214,7 +212,7 @@ public class SignUp extends AppCompatActivity {
             til_cpassword.setError("Confirm the password");
             return REQUEST_DENIED;
         }
-        else if(!password_validity(pass)){
+        else if(!Tools.passwordValidator(pass)){
             Pass.setError("Password must be of minimum 8 characters. It can only include letters a-z, A-Z, numbers from 0-9 and only these '_@$*!?' special characters.");
             return REQUEST_DENIED;
         }
@@ -228,7 +226,7 @@ public class SignUp extends AppCompatActivity {
             age.setError("Set Date of Birth");
             return REQUEST_DENIED;
         }
-        else if(!((between(date,today).getYears()>18)||(between(date,today).getYears()==18)&&(between(date,today).getMonths()>0||between(date,today).getDays()>=1))){
+        else if(!Tools.ageValidator(date,today)){
             Toast.makeText(SignUp.this, "Your age is not above 18",
                     Toast.LENGTH_LONG).show();
             return REQUEST_DENIED;
@@ -253,11 +251,11 @@ public class SignUp extends AppCompatActivity {
         til_cpassword.setError(null);
     }
     //to check is the email field is empty
-    private boolean isEmail(EditText text) {
+ /*   private boolean isEmail(EditText text) {
         CharSequence email = text.getText().toString();
         return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
     }
-
+*/
     //to check if any other field is empty or not
     private boolean isEmpty(EditText text) {
         CharSequence str = text.getText().toString();
@@ -270,7 +268,7 @@ public class SignUp extends AppCompatActivity {
     }
 
     private boolean username_validity(String user_name){
-        if(!(user_name.matches("^([a-zA-Z0-9_]){5,30}$")&&user_name.length()>=5)){
+        if(!Tools.usernameValidator(user_name)){
             username.setError("Username can only contain a-z, A-Z, 0-9,'_' and should have a length between 5 and 30 characters only");
             til_username.setError("Invalid username");
             return REQUEST_DENIED;
@@ -300,14 +298,16 @@ public class SignUp extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Log.i("SignUP", e.getMessage());
+                    Log.i("SignUP", Objects.requireNonNull(e.getMessage()));
                 }
             });
     }
 
+/*
     protected boolean password_validity(String pass){
         return pass.matches("^([a-zA-z0-9_@$*!?]){8,30}$");
     }
+*/
 
     protected void saveInfo(LocalDate date, String uid, String username){
         String dob = date.toString();
@@ -318,6 +318,9 @@ public class SignUp extends AppCompatActivity {
         data.put("DOB",dob);
         data.put("username",username);
         data.put("favourite",fav_list);
+        data.put("profile_image","image");
+        data.put("WelcomeStage","none");
+        data.put("UserStatus", true);
         db.collection("users").document(uid).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {

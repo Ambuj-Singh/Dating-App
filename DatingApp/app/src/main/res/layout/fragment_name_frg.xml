@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".user.Profile_Frags.NameFrg">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/nameProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:trackColor="@color/white"
+            android:layout_alignTop="@+id/page1"/>
+
+
+        <LinearLayout
+            android:id="@+id/page1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                android:padding="8dp"
+                android:layout_margin="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/mons_reg"
+                android:text="@string/enter_name"
+                android:textColor="@color/colorPrimary" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                android:text="@string/name_detail"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_first_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/f_name"
+                android:padding="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_gravity="center"
+                android:textColorHint="@color/gray"
+                app:errorEnabled="false">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/first_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/rubik_regular"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_last_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/l_name"
+                android:padding="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_gravity="center"
+                android:textColorHint="@color/gray"
+                app:errorEnabled="false">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/last_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/rubik_regular"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/name_saver"
+            style="@style/colored_custom_butt_transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_chevron_right_24"
+            app:tint="@color/white"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="8dp"
+            android:layout_alignBottom="@+id/page1"
+            android:layout_alignEnd="@+id/page1"
+            />
+    </RelativeLayout>
+
+</FrameLayout>

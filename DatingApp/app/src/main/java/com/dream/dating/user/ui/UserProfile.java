@@ -15,7 +15,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,9 +32,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.bumptech.glide.Glide;
+import com.dream.dating.Models.User_Getter;
 import com.dream.dating.ProfileInfoGrabber;
 import com.dream.dating.R;
-import com.dream.dating.Models.User_Getter;
+import com.dream.dating.Services.DataContext;
+import com.dream.dating.Tools;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.chip.Chip;
@@ -59,6 +60,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -70,7 +72,8 @@ import java.util.Objects;
 public class UserProfile extends AppCompatActivity {
 
     private boolean ProfileShow;
-    private String downloadProfileURL;
+    private String columnPicture;
+    private DataContext dataContext;
     private List<String> checked_chips;
     private ChipGroup chipGroup;
     private static int PERMISSION_STORAGE_GRANTED = 1;
@@ -100,13 +103,14 @@ public class UserProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
+        //initializing server and local database
+        dataContext = new DataContext(this);
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
         //initializing view elements of the page
         initializeViewElements();
         //initializing display units
         initializeDisplayUnits();
-
 
         //Headers
         header_visiting = findViewById(R.id.header_visiting);
@@ -873,41 +877,18 @@ public class UserProfile extends AppCompatActivity {
     public void enable_general_edit(View view) {
         save_general_button.setVisibility(View.VISIBLE);
     }
+    //general card ends here
 
+    //edit display picture upload function
     public void edit_profile_pic(View view) {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         path = uid + "/profile_pic";
         Type = "image/*";
-        createDialog_pic_upload("Upload");
+        getStoragePermission();
     }
 
-    public void createDialog_pic_upload(String title) {
-        LayoutInflater layoutInflater = LayoutInflater.from(this);
-        final View view = layoutInflater.inflate(R.layout.pic_upload_dialog, null);
-        view.findViewById(R.id.linearPb_dialog).setVisibility(View.INVISIBLE);
-        view.findViewById(R.id.checked_dialog).setVisibility(View.INVISIBLE);
-        final Button upload = view.findViewById(R.id.upload_dialog);
-        upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                upload.setVisibility(View.INVISIBLE);
-                view.findViewById(R.id.linearPb_dialog).setVisibility(View.VISIBLE);
-                getStoragePermission();
-            }
-        });
-        new MaterialAlertDialogBuilder(this)
-                .setTitle(title)
-                .setView(view)
-                .setPositiveButton("Done", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        header_init(df_user,header);
-                    }
-                }).create()
-        .show();
-    }
 
-    //general card ends here
+
     private void getStoragePermission() {
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
@@ -960,15 +941,6 @@ ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
     public void upload(Uri uri, final String path) {
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         View view = layoutInflater.inflate(R.layout.pic_upload_dialog, null);
-        final ImageView imageView = view.findViewById(R.id.displayPic_dialog);
-
-        try {
-       Glide.with(this)
-               .load(uri.getPath())
-               .into(imageView);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
         StorageReference storageReferenceImg = storageReference.child(path);
@@ -994,8 +966,8 @@ ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
                 storageReferenceImg.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        setProfilePic(imageView,uri.toString());
                         saveDownloadLink(uri.toString());
+                        saveToLocalDatabaseFromServer(System.currentTimeMillis());
                     }
                 });
 
@@ -1009,10 +981,15 @@ ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
 
     }
 
+    //edit display picture upload function ends here
+
     //Save profile download url for glide
     private void saveDownloadLink(String download) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid().trim();
+        String uid = null;
+        if (user != null) {
+            uid = user.getUid().trim();
+        }
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference collectionReference = db.collection("users");
@@ -1020,24 +997,21 @@ ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
         Map<String, Object> url = new HashMap<>();
         url.put("ProfileURL", download);
 
-        collectionReference.document(uid).set(url, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.i("Save Url", "Saved");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.i("Save Url", "Not Saved");
-            }
-        });
+        if (uid != null) {
+            collectionReference.document(uid).set(url, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Log.i("Save Url", "Saved");
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.i("Save Url", "Not Saved");
+                }
+            });
+        }
     }
-
-    private void setProfilePic(ImageView imageView, String downloadURL) {
-    Glide.with(this)
-            .load(downloadURL)
-            .into(imageView);
-    }
+    //Save profile download url for glide ends here
 
     public void save_about_me(View view) {
         save_about_button.setVisibility(View.GONE);
@@ -1397,4 +1371,27 @@ ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
             }
         });
     }
+
+    //pending picture save to local database from uri
+    private void saveToLocalDatabaseFromServer(long timestamp) {
+        String local_path = "Media/DDProfilePhotos";
+        String name = "IMGPP"+ Tools.getDateInFormat(timestamp)+".jpeg";
+        File rootPath = new File(this.getFilesDir().getAbsolutePath()+File.separator+"DreamDating/"+local_path);
+
+        StorageReference reference = FirebaseStorage.getInstance().getReference();
+        StorageReference storageReference = reference.child(path);
+        if(!rootPath.exists()) {
+            rootPath.mkdirs();
+        }
+        final File localFile = new File(rootPath,name);
+            storageReference.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Toast.makeText(UserProfile.this, "Profile Picture changed", Toast.LENGTH_SHORT).show();
+                dataContext.updateProfilePic(localFile.toString());
+            }).addOnFailureListener(e -> {
+                Toast.makeText(UserProfile.this, "Network interrupted", Toast.LENGTH_SHORT).show();
+                Log.i("UserProfile", Objects.requireNonNull(e.getMessage()));
+            });
+
     }
+
+}

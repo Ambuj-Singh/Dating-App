@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/sent"
+        android:background="@drawable/sent_box"
         android:layout_gravity="end"
         android:orientation="vertical"
         android:padding="1dp">

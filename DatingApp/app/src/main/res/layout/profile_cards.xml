@@ -11,32 +11,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:background="@color/dark_grey"
+        android:background="@drawable/alt_image"
         android:elevation="8dp"
         android:padding="16dp">
 
-        <ImageButton
-            android:id="@+id/bio_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="15dp"
-            android:background="@drawable/ic_baseline_edit_24"
-            android:onClick="showDialog_about_me_edit" />
-
         <LinearLayout
+            android:id="@+id/box1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/dark_grey"
+            android:background="@color/sent_message"
             android:orientation="vertical">
-
-            <TextView
-                style="@style/title_black"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/About"
-                android:textColor="@color/white" />
+                >
 
+                <TextView
+                    style="@style/title_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/About"
+                    android:textColor="@color/white" />
+
+                <ImageButton
+                    android:id="@+id/bio_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/ic_baseline_edit_24"
+                    android:onClick="showDialog_about_me_edit" />
+
+            </RelativeLayout>
             <TextView
                 android:id="@+id/profile_bio"
                 android:layout_width="match_parent"
@@ -76,36 +84,43 @@
         android:elevation="8dp"
         android:padding="16dp">
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/general_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginEnd="50dp"
-            android:padding="15dp"
-            android:theme="@style/switches" />
-
-        <ImageButton
-            android:id="@+id/general_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="15dp"
-            android:background="@drawable/ic_baseline_edit_24"
-            android:onClick="enable_general_edit" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/dark_grey"
+            android:background="@color/sent_message"
             android:orientation="vertical">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        style="@style/title_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/general"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/white" />
 
-            <TextView
-                style="@style/title_black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/general"
-                android:textColor="@color/white" />
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/general_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="16dp"
+        android:layout_toStartOf="@+id/general_edit"
+        android:theme="@style/switches" />
+
+    <ImageButton
+        android:id="@+id/general_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/ic_baseline_edit_24"
+        android:onClick="enable_general_edit" />
+
+</RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/general_card_view"
@@ -485,39 +500,49 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:elevation="8dp"
-        android:background="@color/dark_grey"
+        android:background="@drawable/alt_image"
         android:padding="16dp">
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/social_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginEnd="50dp"
-            android:padding="15dp"
-            android:theme="@style/switches" />
 
-        <ImageButton
-            android:id="@+id/social_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="15dp"
-            android:background="@drawable/ic_baseline_edit_24"
-            android:onClick="enable_edit" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/dark_grey"
+            android:background="@color/sent_message"
             android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                style="@style/title_black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/social"
-                android:textColor="@color/white" />
+                <TextView
+                    style="@style/title_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/social"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:textColor="@color/white" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/social_switch"
+                    android:theme="@style/switches"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="16dp"
+                    android:layout_toStartOf="@id/social_edit" />
+
+                <ImageButton
+                    android:id="@+id/social_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/ic_baseline_edit_24"
+                    android:onClick="enable_edit" />
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/social_card_view"
@@ -1206,31 +1231,38 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:elevation="8dp"
-        android:background="@color/dark_grey"
+        android:background="@color/sent_message"
         android:padding="16dp">
-
-        <ImageButton
-            android:id="@+id/my_own_words_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="15dp"
-            android:background="@drawable/ic_baseline_edit_24"
-            android:onClick="showDialog_own_words_edit" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/dark_grey"
+            android:background="@color/sent_message"
             android:orientation="vertical">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-            <TextView
-                style="@style/title_black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/words"
-                android:textColor="@color/white" />
+    <ImageButton
+        android:id="@+id/my_own_words_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/ic_baseline_edit_24"
+        android:onClick="showDialog_own_words_edit" />
 
+    <TextView
+        style="@style/title_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/words"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/white" />
+
+</RelativeLayout>
             <TextView
                 android:id="@+id/profile_my_own_words"
                 android:layout_width="match_parent"
