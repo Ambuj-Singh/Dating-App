@@ -32,6 +32,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.bumptech.glide.Glide;
+import com.dream.dating.Models.UserInfo;
 import com.dream.dating.Models.User_Getter;
 import com.dream.dating.ProfileInfoGrabber;
 import com.dream.dating.R;
@@ -206,7 +207,7 @@ public class UserProfile extends AppCompatActivity {
         progressDialog.setMessage("Loading...");
         progressDialog.create();
         progressDialog.show();
-        ProgressBar progressBar =  progressDialog.findViewById(android.R.id.progress);
+        ProgressBar progressBar = progressDialog.findViewById(android.R.id.progress);
         progressBar.getIndeterminateDrawable().setTint(Color.rgb(98,0,238));
         setProfileShow(new settingProfileShow() {
             @Override
@@ -230,17 +231,47 @@ public class UserProfile extends AppCompatActivity {
                 generalSwitchSet();
             }
         });
-
-
+        //Chat button pressed action
+        //adding user to local storage to initiate conversation
         FloatingActionButton chat = findViewById(R.id.chat_profile);
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(UserProfile.this,Conversation.class);
-                i.putExtra("uid",uid);
-                startActivity(i);
+                progressDialog.setMessage("Loading...");
+                progressDialog.create();
+                progressDialog.show();
+                ProgressBar progressBar = progressDialog.findViewById(android.R.id.progress);
+                progressBar.getIndeterminateDrawable().setTint(Color.rgb(98,0,238));
+
+                getUserInfo(df_user, new ChatCallback() {
+                    @Override
+                    public void onCallback(UserInfo userInfo) {
+                        dataContext.insertUser(userInfo);
+                        Intent i = new Intent(UserProfile.this,Conversation.class);
+                        i.putExtra("uid",uid);
+                        startActivity(i);
+                    }
+                });
+
+
             }
         });
+    }
+
+    private interface ChatCallback{
+        void onCallback(UserInfo userInfo);
+    }
+
+    private void getUserInfo(DocumentReference df_user, final ChatCallback callback) {
+        df_user.get().addOnSuccessListener(documentSnapshot -> {
+            try{
+                UserInfo user = documentSnapshot.toObject(UserInfo.class);
+                  callback.onCallback(user);
+            }
+            catch (Exception e){
+                Log.i("chatButton",e.getMessage());
+            }
+        }).addOnFailureListener(e -> Log.i("chatbutton",e.getMessage()+" Local data save failed"));
     }
 
     private void generalSwitchSet(){
