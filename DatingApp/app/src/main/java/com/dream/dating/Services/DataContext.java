@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.dream.dating.Models.MessageModel;
@@ -52,7 +53,7 @@ public class DataContext extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public void insertMessage(MessageModel message){
+    public void insertMessage(@NonNull MessageModel message){
 
         SQLiteDatabase db = this.getWritableDatabase();
         SQLiteDatabase db_1 = getReadableDatabase();
@@ -183,7 +184,7 @@ public class DataContext extends SQLiteOpenHelper {
         }
     }
 
-    public void updateMessageCounter(String username){
+    public void updateMessageCounter(@NonNull String username){
         Cursor cursor = null;
         SQLiteDatabase db = null;
         SQLiteDatabase db1 = null;
@@ -205,7 +206,7 @@ public class DataContext extends SQLiteOpenHelper {
         }
     }
 
-    public int checkUserDuplication(String username){
+    public int checkUserDuplication(@NonNull String username){
         Cursor cursor = null;
         SQLiteDatabase db = null;
         try {
@@ -226,7 +227,7 @@ public class DataContext extends SQLiteOpenHelper {
         }
     }
 
-    public int checkMessageDuplication(MessageModel messageModel){
+    public int checkMessageDuplication(@NonNull MessageModel messageModel){
         String sender = messageModel.getSender();
         String receiver = messageModel.getReceiver();
         long timestamp = messageModel.getTimestamp();
@@ -252,6 +253,7 @@ public class DataContext extends SQLiteOpenHelper {
         }
     }
 
+    @NonNull
     public UserInfo getUserInfo(String username){
         UserInfo userInfo = new UserInfo();
 
@@ -275,6 +277,7 @@ public class DataContext extends SQLiteOpenHelper {
         return userInfo;
     }
 
+    @NonNull
     public List<UserInfo> getAllUsers() {
 
         String selectUsers = "select * from Friends;";
@@ -315,6 +318,7 @@ public class DataContext extends SQLiteOpenHelper {
         return users;
     }
 
+    @NonNull
     public List<UserInfo> getAllLatestChatUsers(){
         UserInfo userInfo = new UserInfo();
 
@@ -370,6 +374,7 @@ public class DataContext extends SQLiteOpenHelper {
         this.getWritableDatabase().execSQL(query);
     }
 
+    @NonNull
     public String getUsername(){
         String query = "select username from username;";
         String username = "none";
@@ -384,6 +389,7 @@ public class DataContext extends SQLiteOpenHelper {
 
     }
 
+    @NonNull
     public String getName(){
         String query = "select name from username;";
         String name = "none";
@@ -398,6 +404,7 @@ public class DataContext extends SQLiteOpenHelper {
 
     }
 
+    @NonNull
     public String getUID() {
         String query = "select uid from username;";
         String username = "none";
@@ -430,7 +437,7 @@ public class DataContext extends SQLiteOpenHelper {
     }
 */
 
-    public void clearChat(String sender, String receiver) {
+    public void clearChat(@NonNull String sender, @NonNull String receiver) {
 
         String whereCondition = "((sender = '" + sender + "' and receiver='" + receiver + "') or (receiver = '" + sender + "' and sender='" + receiver + "'))";
 
@@ -440,13 +447,23 @@ public class DataContext extends SQLiteOpenHelper {
         getWritableDatabase().execSQL(deleteConversationQuery);
     }
 
-    public void updateProfilePic(String path) {
+    public void updateProfilePic(@NonNull String path) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         String update_profile = "update username set image ='"+path+"';";
         sqLiteDatabase.execSQL(update_profile);
     }
 
+    public void setName(@NonNull String fullName) {
+        SQLiteDatabase sql = this.getWritableDatabase();
+        String insert = "insert into username(name) values('"+fullName+"');";
+        sql.execSQL(insert);
+    }
 
+    public void updateName(String fullName) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String update = "update username set name = '"+fullName+"';";
+        sqLiteDatabase.execSQL(update);
+    }
 
     /*public void setKeysAndRegistrationId(IdentityKeyPair identityKeyPair, int id, int registrationId, String signedPreKeyPublicKey, String signedPreKeyRecordSignature){
 

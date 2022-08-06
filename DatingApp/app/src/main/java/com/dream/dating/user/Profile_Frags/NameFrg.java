@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.dream.dating.R;
+import com.dream.dating.Services.DataContext;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,6 +31,7 @@ import java.util.Map;
 public class NameFrg extends Fragment {
 
     protected FirebaseUser user;
+    DataContext dataContext;
     private String uid;
     protected static boolean REQUEST_ACCEPTED = true, REQUEST_DENIED = false;
 
@@ -41,6 +43,7 @@ public class NameFrg extends Fragment {
         user = mAuth.getCurrentUser();
         assert user != null;
         uid = user.getUid();
+        dataContext = new DataContext(getContext());
 
     }
 
@@ -62,6 +65,7 @@ public class NameFrg extends Fragment {
         FloatingActionButton Saver = view.findViewById(R.id.name_saver);
         ProgressBar progressBar = view.findViewById(R.id.nameProgress);
         progressBar.setVisibility(View.INVISIBLE);
+
         Saver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +86,7 @@ public class NameFrg extends Fragment {
                     collectionReference.document(uid).update(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
+                                    dataContext.setName(FullName);
                                     Log.i("Saved FullName", "Saved");
                                     //adding ProfileMaker flag
                                     Log.i("Welcome","Saved");

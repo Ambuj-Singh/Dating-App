@@ -73,12 +73,10 @@ import java.util.Objects;
 
 public class UserProfile extends AppCompatActivity {
 
-    private boolean ProfileShow;
-    private String columnPicture;
     private DataContext dataContext;
     private List<String> checked_chips;
     private ChipGroup chipGroup;
-    private static int PERMISSION_STORAGE_GRANTED = 1;
+    private static final int PERMISSION_STORAGE_GRANTED = 1;
     public View header_visiting, header_user;
     //profile header
     public ImageView header_profile_display, header_gender_display, header_gender_display_user, header_profile_display_user;
@@ -91,7 +89,6 @@ public class UserProfile extends AppCompatActivity {
     //edit buttons
     private ImageButton Bio_edit, general_edit,Social_edit, Own_words_edit;
     private DocumentReference documentReference,df_user;
-    private boolean header;
     //Switches
     private SwitchMaterial social_switch, general_switch;
     //Social edit buttons
@@ -127,6 +124,7 @@ public class UserProfile extends AppCompatActivity {
 
 
         //Checking User uid to allow edit options
+        boolean header;
         if (uid != null) {
             if(!UserUID.equals(uid)) {
 
@@ -168,7 +166,7 @@ public class UserProfile extends AppCompatActivity {
             header = true;
         }
         enableEditOptions();
-        header_init(df_user,header);
+        header_init(df_user, header);
         query_maker(documentReference);
         final FloatingActionButton fab_favourite = findViewById(R.id.favourite_profile);
 
@@ -220,7 +218,7 @@ public class UserProfile extends AppCompatActivity {
         setProfileShow(new settingProfileShow() {
             @Override
             public void onCallback(boolean value) {
-                ProfileShow = value;
+
                 progressDialog.cancel();
             }
         });
@@ -714,16 +712,13 @@ public class UserProfile extends AppCompatActivity {
         new MaterialAlertDialogBuilder(this)
                 .setTitle(data_label)
                 .setView(view)
-                .setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        int value = (int) slider.getValue();
-                        int save = ids.get(value);
-                        Map<String, Object> data = new HashMap<>();
-                        data.put(data_label, save);
-                        Log.i("Slider_value", String.valueOf(value));
-                        saveInfoDots(data,data_label);
-                    }
+                .setPositiveButton("SAVE", (dialog, which) -> {
+                    int value = (int) slider.getValue();
+                    int save = ids.get(value);
+                    Map<String, Object> data = new HashMap<>();
+                    data.put(data_label, save);
+                    Log.i("Slider_value", String.valueOf(value));
+                    saveInfoDots(data,data_label);
                 }).create()
         .show();
 
