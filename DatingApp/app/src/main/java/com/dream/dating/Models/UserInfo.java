@@ -3,7 +3,7 @@ package com.dream.dating.Models;
 public class UserInfo {
 
     private String username;
-    private String name;
+    private String Name;
     private String image;
     private String message;
     private long timestamp;
@@ -12,9 +12,9 @@ public class UserInfo {
     private int UserStatus;
     private int Counter;
 
-    public UserInfo(String username, String name, String image, String message, long timestamp, int age, String UID, int UserStatus, int Counter){
+    public UserInfo(String username, String Name, String image, String message, long timestamp, int age, String UID, int UserStatus, int Counter){
         this.username = username;
-        this.name = name;
+        this.Name = Name;
         this.image = image;
         this.message = message;
         this.timestamp = timestamp;
@@ -32,8 +32,8 @@ public class UserInfo {
         this.username = username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String Name) {
+        this.Name = Name;
     }
 
     public void setImage(String image) {
@@ -45,7 +45,7 @@ public class UserInfo {
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public String getImage() {

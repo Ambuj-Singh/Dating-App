@@ -188,7 +188,7 @@ public class Login extends AppCompatActivity {
                         progressDialog.create();
                         progressDialog.show();
                         ProgressBar progressBar =  progressDialog.findViewById(android.R.id.progress);
-                        progressBar.getIndeterminateDrawable().setTint(Color.rgb(98,0,238));
+                        progressBar.getIndeterminateDrawable().setTint(getResources().getColor(R.color.colorAccent,null));
                         String email_reset;
                         email_reset = Objects.requireNonNull(input.getText()).toString().trim();
                         //Checking for User input for null value

@@ -81,7 +81,7 @@ public class UserProfile extends AppCompatActivity {
     //profile header
     public ImageView header_profile_display, header_gender_display, header_gender_display_user, header_profile_display_user;
     //Social chip selection view
-    public TextView header_username_display, header_username_display_user, header_age_display, header_age_display_user, social_option_prof, social_option_religion, social_option_fav_food, social_option_music,
+    public TextView header_username_display, header_username_display_user,  header_name_display_user,  header_name_display, header_age_display, header_age_display_user, social_option_prof, social_option_religion, social_option_fav_food, social_option_music,
             social_option_sports, social_option_going_out, social_option_travel, social_option_interests,
             language, looking, smoker, body, body_hair, eye_color, hair_color, piercings, tattoos, save_about_button,
             save_own_words_button, save_general_button, save_social_button;
@@ -96,7 +96,7 @@ public class UserProfile extends AppCompatActivity {
             social_option_5, social_option_6, social_option_7, social_option_8, social_option_9, social_option_10,
             social_option_11, social_option_12, general_option_1, general_option_2, general_option_3, general_option_4,
             general_option_5, general_option_6, general_option_7, general_option_8, general_option_9;
-
+   private UserInfo userInfo;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,11 +106,12 @@ public class UserProfile extends AppCompatActivity {
         dataContext = new DataContext(this);
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
+
         //initializing view elements of the page
         initializeViewElements();
         //initializing display units
         initializeDisplayUnits();
-
+        removeEditOptions();
         //Headers
         header_visiting = findViewById(R.id.header_visiting);
         header_visiting.setVisibility(View.GONE);
@@ -133,13 +134,12 @@ public class UserProfile extends AppCompatActivity {
                 header_profile_display = findViewById(R.id.profile_display);
                 header_age_display = findViewById(R.id.age_display);
                 header_username_display = findViewById(R.id.display_name_visiting);
-
+                header_name_display = findViewById(R.id.display_full_name);
                 documentReference = firebaseFirestore.collection("users").document(uid).collection("profile").document("profile_view");
                 header_visiting.setVisibility(View.VISIBLE);
                 //remove Edit options if the user is not the logged in user
                 df_user = firebaseFirestore.collection("users").document(uid);
                 header = false;
-
             } else {
                 //enable Edit options if the user is the logged in user
                 //profile header elements for user
@@ -147,11 +147,12 @@ public class UserProfile extends AppCompatActivity {
                 header_profile_display_user = findViewById(R.id.profile_display_user);
                 header_age_display_user = findViewById(R.id.age_display_user);
                 header_username_display_user = findViewById(R.id.display_name_user);
-
+                header_name_display_user = findViewById(R.id.display_full_name_user);
                 documentReference = firebaseFirestore.collection("users").document(UserUID).collection("profile").document("profile_view");
                 header_user.setVisibility(View.VISIBLE);
                 df_user = firebaseFirestore.collection("users").document(UserUID);
                 header = true;
+                enableEditOptions();
             }
         } else {
             //profile header elements for user
@@ -159,23 +160,31 @@ public class UserProfile extends AppCompatActivity {
             header_profile_display_user = findViewById(R.id.profile_display_user);
             header_age_display_user = findViewById(R.id.age_display_user);
             header_username_display_user = findViewById(R.id.display_name_user);
-
+            header_name_display_user = findViewById(R.id.display_full_name_user);
             documentReference = firebaseFirestore.collection("users").document(UserUID).collection("profile").document("profile_view");
             header_user.setVisibility(View.VISIBLE);
             df_user = firebaseFirestore.collection("users").document(UserUID);
             header = true;
         }
-        enableEditOptions();
+
         header_init(df_user, header);
         query_maker(documentReference);
         final FloatingActionButton fab_favourite = findViewById(R.id.favourite_profile);
+
 
 
         df_user.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
+
                    ProfileInfoGrabber grabber = documentSnapshot.toObject(ProfileInfoGrabber.class);
+
+                    if (grabber != null) {
+                        Log.i("grabber", String.valueOf(grabber.getAge()));
+
+                    }
+
                    if(documentSnapshot.get("favourite")!=null){
                         List<String> fav_list = grabber.getFavourite();
                         if (fav_list.contains(UserUID)) {
@@ -191,10 +200,11 @@ public class UserProfile extends AppCompatActivity {
             }
         });
 
+
         //back button for user own profile
         FloatingActionButton profileUserBack = findViewById(R.id.profile_user_back);
         profileUserBack.setOnClickListener(v -> {
-            Intent i = new Intent(this, AccountActivity.class);
+            Intent i = new Intent(this, UserActivity.class);
             startActivity(i);
             finish();
         });
@@ -209,19 +219,41 @@ public class UserProfile extends AppCompatActivity {
                     getFavourite(df_user, fab_favourite);
                 }
             });
+        //conversation switch
+        FloatingActionButton chat = findViewById(R.id.chat_profile);
+        chat.setEnabled(false);
+        chat.setBackgroundColor(getResources().getColor(R.color.gray,null));
+
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
         progressDialog.create();
         progressDialog.show();
         ProgressBar progressBar = progressDialog.findViewById(android.R.id.progress);
-        progressBar.getIndeterminateDrawable().setTint(Color.rgb(98,0,238));
-        setProfileShow(new settingProfileShow() {
-            @Override
-            public void onCallback(boolean value) {
+        progressBar.getIndeterminateDrawable().setTint(getResources().getColor(R.color.colorAccent,null));
 
+        getUserInfo(new ProfileGrabber() {
+            @Override
+            public void onCallback(ProfileInfoGrabber value) {
+                chat.setEnabled(true);
+                chat.setBackgroundColor(getResources().getColor(R.color.PinkDark,null));
+                userInfo = userInfoToPIG(value);
                 progressDialog.cancel();
+
             }
         });
+
+
+        chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dataContext.insertUser(userInfo);
+                Toast.makeText(UserProfile.this, "Friend Added", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(UserProfile.this, Conversation.class);
+                i.putExtra("uid", uid);
+                startActivity(i);
+            }
+        });
+        //conversation button ends
 
         //Social Display Switch
         social_switch.setOnClickListener(new View.OnClickListener() {
@@ -239,43 +271,26 @@ public class UserProfile extends AppCompatActivity {
         });
         //Chat button pressed action
         //adding user to local storage to initiate conversation
-        FloatingActionButton chat = findViewById(R.id.chat_profile);
-        chat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressDialog.setMessage("Loading...");
-                progressDialog.create();
-                progressDialog.show();
-                ProgressBar progressBar = progressDialog.findViewById(android.R.id.progress);
-                progressBar.getIndeterminateDrawable().setTint(Color.rgb(98,0,238));
 
-                getUserInfo(df_user, userInfo -> {
-                    dataContext.insertUser(userInfo);
-                    progressDialog.cancel();
-                    Toast.makeText(UserProfile.this, "Friend Added", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(UserProfile.this,Conversation.class);
-                    i.putExtra("uid",uid);
-                    startActivity(i);
-                });
-            }
-        });
+
+
     }
 
-    private interface ChatCallback{
-        void onCallback(UserInfo userInfo);
-    }
-
-    private void getUserInfo(DocumentReference df_user, final ChatCallback callback) {
-        df_user.get().addOnSuccessListener(documentSnapshot -> {
-            try{
-                UserInfo user = documentSnapshot.toObject(UserInfo.class);
-                  callback.onCallback(user);
-            }
-            catch (Exception e){
-                Log.i("chatButton",e.getMessage());
-            }
-        }).addOnFailureListener(e -> Log.i("chatbutton",e.getMessage()+" Local data save failed"));
-    }
+//    private interface ChatCallback{
+//        void onCallback(UserInfo userInfo);
+//    }
+//
+//    private void getUserInfo(DocumentReference df_user, final ChatCallback callback) {
+//        df_user.get().addOnSuccessListener(documentSnapshot -> {
+//            try{
+//                UserInfo user = documentSnapshot.toObject(UserInfo.class);
+//                  callback.onCallback(user);
+//            }
+//            catch (Exception e){
+//                Log.i("chatButton",e.getMessage());
+//            }
+//        }).addOnFailureListener(e -> Log.i("chatbutton",e.getMessage()+" Local data save failed"));
+//    }
 
     private void generalSwitchSet(){
         if(!general_switch.isChecked()){
@@ -345,18 +360,20 @@ public class UserProfile extends AppCompatActivity {
         finish();
     }
 */
-    private interface settingProfileShow{
-        void onCallback(boolean value);
+    private interface ProfileGrabber {
+        void onCallback(ProfileInfoGrabber value);
     }
 
-    private void setProfileShow(final settingProfileShow callback){
+    private void getUserInfo(final ProfileGrabber callback){
         df_user.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if(documentSnapshot.exists()){
                     ProfileInfoGrabber grabber = documentSnapshot.toObject(ProfileInfoGrabber.class);
+
                     if(grabber!=null){
-                      callback.onCallback(grabber.isProfileShow());
+                        Log.i("profileGrabber",grabber.getName()+" name");
+                      callback.onCallback(grabber);
                     }
                 }
             }
@@ -499,7 +516,7 @@ public class UserProfile extends AppCompatActivity {
     }
     //favourite functions end
 
-    /*remove edit options
+    //remove edit options
     public void removeEditOptions() {
         social_switch.setVisibility(View.GONE);
         Bio_edit.setVisibility(View.GONE);
@@ -540,7 +557,6 @@ public class UserProfile extends AppCompatActivity {
         general_option_9.setEnabled(false);
         general_switch.setEnabled(false);
     }
-*/
     //enabling all edit options
     public void enableEditOptions() {
 
@@ -1072,14 +1088,15 @@ ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
                         int age = getter.getAge();
                         int gender = getter.getGender();
                         String dp = getter.getProfileURL();
-                        feedDataToHeaderDisplayUnit(about_me,username,age,gender,dp,header_selection);
+                        String name = getter.getName();
+                        feedDataToHeaderDisplayUnit(name, about_me,username,age,gender,dp,header_selection);
                     }
                 }
             }
         });
     }
 
-    private void feedDataToHeaderDisplayUnit(String about_me, String username, int age, int gender, String dp, boolean header_selection) {
+    private void feedDataToHeaderDisplayUnit(String name, String about_me, String username, int age, int gender, String dp, boolean header_selection) {
         List<Integer> list = new ArrayList<>();
         list.add(R.drawable.trans_symbol);
         list.add(R.drawable.male_symbol);
@@ -1087,7 +1104,8 @@ ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
         TextView textView = findViewById(R.id.profile_bio);
         if(header_selection){
             textView.setText(about_me);
-            header_username_display_user.setText(username);
+            header_username_display_user.setText("@"+username);
+            header_name_display_user.setText(name);
             Glide.with(this)
                     .load(dp)
                     .circleCrop()
@@ -1102,7 +1120,8 @@ ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
         }
         else{
             textView.setText(about_me);
-            header_username_display.setText(username);
+            header_username_display.setText("@"+username);
+            header_name_display.setText(name);
             Glide.with(this).
                     load(dp)
                     .circleCrop()
@@ -1423,6 +1442,17 @@ ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
                 Log.i("UserProfile", Objects.requireNonNull(e.getMessage()));
             });
 
+    }
+
+    private UserInfo userInfoToPIG(ProfileInfoGrabber grabber){
+        UserInfo userInfo = new UserInfo();
+        userInfo.setAge(grabber.getAge());
+        userInfo.setUID(grabber.getUID());
+        userInfo.setName(grabber.getName());
+        userInfo.setUsername(grabber.getusername());
+        userInfo.setUserStatus(Tools.booleanToInteger(grabber.getUserStatus()));
+        userInfo.setImage(grabber.getProfileURL());
+        return userInfo;
     }
 
 }

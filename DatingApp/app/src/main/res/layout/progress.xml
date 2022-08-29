@@ -21,7 +21,7 @@
 
             <!-- Media -->
             <ImageView
-                android:id="@+id/display_profile"
+                android:id="@+id/received_image"
                 android:layout_width="180dp"
                 android:layout_height="180dp"
                 android:scaleType="centerCrop"

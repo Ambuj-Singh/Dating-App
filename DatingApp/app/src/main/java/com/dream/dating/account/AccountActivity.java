@@ -2,7 +2,6 @@ package com.dream.dating.account;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -40,8 +39,8 @@ public class AccountActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private OneTimeWorkRequest oneTimeWorkRequestA, oneTimeWorkRequestB;
     private ImageView profile_image;
-    private TextView username;
-    private TextView name;
+    TextView username;
+    TextView name;
     private DocumentReference df_user;
     private DataContext datacontext;
     @Override
@@ -61,7 +60,7 @@ public class AccountActivity extends AppCompatActivity {
         progressDialog.create();
         progressDialog.show();
         ProgressBar progressBar = progressDialog.findViewById(android.R.id.progress);
-        progressBar.getIndeterminateDrawable().setTint(Color.rgb(98,0,238));
+        progressBar.getIndeterminateDrawable().setTint(getResources().getColor(R.color.colorAccent,null));
 
         datacontext = new DataContext(this);
         String usernameText = "@"+datacontext.getUsername();
@@ -72,11 +71,14 @@ public class AccountActivity extends AppCompatActivity {
         fetchUserData(df_user, new waitTillResults() {
             @Override
             public void Callback(ProfileInfoGrabber grabber) {
-
+                progressDialog.cancel();
                 Glide.with(getApplicationContext())
                         .load(grabber.getProfileURL())
                         .circleCrop()
                         .into(profile_image);
+                username.setText("@"+grabber.getusername());
+                name.setText(grabber.getName());
+
             }
         });
 
@@ -191,6 +193,7 @@ public class AccountActivity extends AppCompatActivity {
 
     public void jumpToUserProfile(View view) {
         Intent intent = new Intent(this, UserProfile.class);
+        intent.putExtra("uid", datacontext.getUID());
         startActivity(intent);
     }
 }

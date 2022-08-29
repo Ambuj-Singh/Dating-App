@@ -35,6 +35,7 @@ public class Tools {
         }
     }
 
+
     public static String getDateInFormat(long timestamp){
         //converting timestamp to String in 12:00 pm format
         try {
@@ -79,7 +80,7 @@ public class Tools {
 
     public static String getPlannedString(MessageModel messageModel){
         return messageModel.getSender()+","+messageModel.getReceiver()+","+messageModel.getImagePath()
-                +","+messageModel.getMessage()+","+messageModel.getTimestamp()
+                +","+new Encryption().encrypt(messageModel.getMessage(),Tools.secret)+","+messageModel.getTimestamp()
                 +","+messageModel.getFilePath();
     }
 
@@ -93,7 +94,7 @@ public class Tools {
         messageModel.setSender(messageArray[0].trim());
         messageModel.setReceiver(messageArray[1].trim());
         messageModel.setImagePath(messageArray[2].trim());
-        messageModel.setMessage(messageArray[3].trim());
+        messageModel.setMessage(new Encryption().decrypt(messageArray[3].trim(),Tools.secret));
         messageModel.setTimestamp(Long.parseLong(messageArray[4].trim()));
         messageModel.setFilePath(messageArray[5].trim());
 

@@ -17,12 +17,13 @@ public class ProfileInfoGrabber {
     private int gender;
     private List<String> favourite;
     private boolean ProfileShow;
+    private String Name;
 
     public ProfileInfoGrabber(){
 
     }
 
-    public ProfileInfoGrabber(String username, int Age, String Bio, String ProfileURL, Boolean UserStatus, String UID, int gender,List<String> favourite,boolean ProfileShow) {
+    public ProfileInfoGrabber(String username, int Age, String Bio, String ProfileURL, Boolean UserStatus, String UID, int gender,List<String> favourite,boolean ProfileShow, String Name) {
         this.username = username;
         this.Age = Age;
         this.Bio = Bio;
@@ -32,6 +33,7 @@ public class ProfileInfoGrabber {
         this.gender = gender;
         this.favourite = favourite;
         this.ProfileShow = ProfileShow;
+        this.Name = Name;
 
     }
 
@@ -93,5 +95,9 @@ public class ProfileInfoGrabber {
 
     public boolean isProfileShow() {
         return ProfileShow;
+    }
+
+    public String getName() {
+        return Name;
     }
 }

@@ -3,11 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/action_bar_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/dark_grey"
+        android:elevation="16dp">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/profiles_toolbar"
+            android:layout_width="match_parent"
+            app:titleTextColor="@color/colorPrimaryDark"
+            android:layout_height="50dp"
+            app:title="Profiles"
+            app:popupTheme="@style/MyDarkToolbarStyle"
+            />
+    </com.google.android.material.appbar.AppBarLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:padding="8dp"/>
 
     <LinearLayout
         android:id="@+id/no_wifi_img"
@@ -37,7 +53,7 @@
         android:layout_alignBottom="@id/recyclerView"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         app:srcCompat="@drawable/ic_baseline_filter_list_white_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

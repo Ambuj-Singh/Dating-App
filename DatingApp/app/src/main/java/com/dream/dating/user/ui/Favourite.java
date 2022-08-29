@@ -3,7 +3,6 @@ package com.dream.dating.user.ui;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -63,7 +62,7 @@ public class Favourite extends Fragment {
         progressDialog.create();
         progressDialog.show();
         ProgressBar progressBar =  progressDialog.findViewById(android.R.id.progress);
-        progressBar.getIndeterminateDrawable().setTint(Color.rgb(98,0,238));
+        progressBar.getIndeterminateDrawable().setTint(getResources().getColor(R.color.colorAccent,null));
 
         recyclerView = view.findViewById(R.id.recyclerView_fav);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2,GridLayoutManager.VERTICAL,false));
@@ -170,7 +169,7 @@ public class Favourite extends Fragment {
         public FavouriteViewHolder(View item) {
             super(item);
             materialCardView = item.findViewById(R.id.card);
-            profile_pic = item.findViewById(R.id.display_profile);
+            profile_pic = item.findViewById(R.id.received_image);
             title = item.findViewById(R.id.user_name);
             age = item.findViewById(R.id.age_view);
             status = item.findViewById(R.id.User_status);

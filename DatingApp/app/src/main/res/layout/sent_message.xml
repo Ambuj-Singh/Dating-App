@@ -54,7 +54,7 @@
                 android:textColor="@color/light_grey"
                 android:textSize="13sp" />
 
-            <ImageSwitcher
+            <ImageView
                 android:id="@+id/message_delivery_status_sent"
                 android:layout_width="15dp"
                 android:layout_height="15dp"

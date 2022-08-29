@@ -4,6 +4,7 @@ import static org.threeten.bp.Period.between;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,7 @@ import androidx.work.WorkManager;
 import com.dream.dating.R;
 import com.dream.dating.Status_Offline;
 import com.dream.dating.Status_Online;
+import com.dream.dating.account.AccountActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -45,8 +47,7 @@ public class UserActivity extends AppCompatActivity {
 
     private LocalDate date;
     private static final String BACK_STACK_ROOT_TAG = "root_fragment", FAV="fragment_fav",
-    VIS = "fragment_visited",PRO="fragment_profiles",SEA="fragment_search";
-    private OneTimeWorkRequest oneTimeWorkRequestA, oneTimeWorkRequestB;
+    SEA = "fragment_search",PRO="fragment_profiles";    private OneTimeWorkRequest oneTimeWorkRequestA, oneTimeWorkRequestB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +78,11 @@ public class UserActivity extends AppCompatActivity {
                     ft.commit();
 
                     break;
-                case R.id.navigation_visited:
+                case R.id.navigation_search:
                     FragmentManager fm_v = getSupportFragmentManager();
                     FragmentTransaction ft_v = fm_v.beginTransaction();
-                    Visited visited = new Visited();
-                    ft_v.replace(R.id.nav_host_fragment, visited,VIS);
+                    SearchProfiles searchProfiles = new SearchProfiles();
+                    ft_v.replace(R.id.nav_host_fragment, searchProfiles, SEA);
                     ft_v.commit();
                     break;
                 case R.id.navigation_chat:
@@ -98,13 +99,9 @@ public class UserActivity extends AppCompatActivity {
                     ft_f.replace(R.id.nav_host_fragment, fav,FAV);
                     ft_f.commit();
                     break;
-
-                case R.id.navigation_search:
-                    FragmentManager fm_s = getSupportFragmentManager();
-                    FragmentTransaction ft_s = fm_s.beginTransaction();
-                    Search sea = new Search();
-                    ft_s.replace(R.id.nav_host_fragment, sea,SEA);
-                    ft_s.commit();
+                case R.id.account:
+                    Intent i = new Intent(UserActivity.this, AccountActivity.class);
+                    startActivity(i);
                     break;
             }
             return true;

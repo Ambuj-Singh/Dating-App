@@ -10,15 +10,8 @@
     <item
         android:id="@+id/navigation_search"
         android:icon="@drawable/ic_baseline_search_24"
-        android:title="@string/search"
         android:enabled="true"
-        />
-
-    <item
-        android:id="@+id/navigation_visited"
-        android:icon="@drawable/ic_baseline_supervisor_account_24"
-        android:enabled="true"
-        android:title="@string/visit" />
+        android:title="@string/search" />
 
     <item
         android:id="@+id/navigation_chat"
@@ -32,5 +25,12 @@
         android:enabled="true"
         android:title="@string/fav" />
 
+
+    <item
+        android:id="@+id/account"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="@string/account"
+        android:enabled="true"
+        />
 
 </menu>

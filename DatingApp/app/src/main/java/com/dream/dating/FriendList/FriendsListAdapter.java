@@ -26,6 +26,7 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListViewMode
 
     private List<UserInfo> usersList;
     private Context context;
+    private Interaction interaction;
 
     public FriendsListAdapter(List<UserInfo> usersList, Interaction interaction, Context context){
         this.usersList = usersList;
@@ -78,14 +79,15 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListViewMode
             }
         });
 
-        holder.title.setText(user.getUsername());
+
+        holder.title.setText(user.getName());
 
         if(user.getTimestamp() > 0)
             holder.time.setText(Tools.getTimeInFormat(user.getTimestamp()));
         else
             holder.time.setVisibility(View.GONE);
 
-        if (!user.getMessage().isEmpty())
+        if (!(user.getMessage()==null))
             holder.message_view.setText(user.getMessage());
         else
             holder.message_view.setText(R.string.default_no_message_in_chat_list);
@@ -97,8 +99,9 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListViewMode
         //Resources.getSystem() when not extending the class to AppCompatActivity
 
         try {
-            holder.itemView.setOnClickListener(view ->
-                    interaction.onChatClicked(holder.getBindingAdapterPosition()));
+            holder.itemView.setOnClickListener(view ->{
+                    interaction.onChatClicked(holder.getBindingAdapterPosition());
+                Log.i("userInfo",(user.getName()+" - name missing"));});
 
             holder.itemView.setOnLongClickListener(view -> {
                 interaction.onChatClicked(holder.getBindingAdapterPosition());
@@ -122,7 +125,7 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListViewMode
         void onChatLongClicked(int position);
     }
 
-    private Interaction interaction;
+
 
     private interface getQueryResult {
         void onCallback(boolean value);

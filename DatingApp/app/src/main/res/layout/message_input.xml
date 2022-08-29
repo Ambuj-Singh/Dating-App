@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:background="@drawable/message_input_background"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
     <ImageView
         android:id="@+id/switch_to_emoji"
         android:layout_width="wrap_content"
@@ -33,16 +39,16 @@
         android:background="@drawable/message_input_background"
         />
     <ImageView
-        android:id="@+id/display_attachment"
+        android:id="@+id/display_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:clickable="true"
         android:padding="14dp"
         android:layout_weight="10"
-        android:rotation="-30"
-        android:src="@drawable/ic_baseline_attach_file_24"
-        android:focusable="true" />
+        android:src="@drawable/ic_menu_camera"
+        android:focusable="true"/>
+    <!--android:rotation="-30"-->
     <ImageView
         android:id="@+id/send_message"
         android:layout_width="wrap_content"
@@ -57,3 +63,4 @@
         android:contentDescription="@string/send_message_to_server" />
 </LinearLayout>
 
+</LinearLayout>

@@ -81,7 +81,7 @@ public class NameFrg extends Fragment {
                     progressBar.setVisibility(View.VISIBLE);
                     Log.i("message", FullName);
                     Map<String, Object> data = new HashMap<>();
-                    data.put("FullName", FullName);
+                    data.put("Name", FullName);
                     data.put("WelcomeStage","name");
                     collectionReference.document(uid).update(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override

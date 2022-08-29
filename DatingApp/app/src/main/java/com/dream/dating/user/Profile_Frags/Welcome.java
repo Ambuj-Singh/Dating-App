@@ -33,7 +33,8 @@ public class Welcome extends Fragment {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference collectionReference = db.collection("users");
         final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        assert currentUser != null;
+
+        if(currentUser != null)
         df = collectionReference.document(currentUser.getUid());
 
 
@@ -57,38 +58,40 @@ public class Welcome extends Fragment {
         next1.setEnabled(false);
         next1.setBackgroundColor(getResources().getColor(R.color.gray,null));
         progressBar.setVisibility(View.VISIBLE);
-        getWelcomeFlag(df, new WelcomeUser() {
-            @Override
-            public void CallBack(String welcome) {
-                switch (welcome){
-                    case "name":
-                        fragment = new GenderSelection();
-                        next1.setEnabled(true);
-                        next1.setBackgroundColor(getResources().getColor(R.color.colorAccent,null));
-                        progressBar.setVisibility(View.GONE);
-                        break;
-                    case "gender":
-                        fragment = new ProfilePicUpload();
-                        next1.setEnabled(true);
-                        next1.setBackgroundColor(getResources().getColor(R.color.colorAccent,null));
-                        progressBar.setVisibility(View.GONE);
-                        break;
-                    case "dp":
-                        fragment = new Bio();
-                        next1.setEnabled(true);
-                        next1.setBackgroundColor(getResources().getColor(R.color.colorAccent,null));
-                        progressBar.setVisibility(View.GONE);
-                        break;
-                    default:
-                        fragment = new NameFrg();
-                        next1.setEnabled(true);
-                        next1.setBackgroundColor(getResources().getColor(R.color.colorAccent,null));
-                        progressBar.setVisibility(View.GONE);
-                        break;
-                }
+        if(df != null) {
+            getWelcomeFlag(df, new WelcomeUser() {
+                @Override
+                public void CallBack(String welcome) {
+                    switch (welcome) {
+                        case "name":
+                            fragment = new GenderSelection();
+                            next1.setEnabled(true);
+                            next1.setBackgroundColor(getResources().getColor(R.color.colorAccent, null));
+                            progressBar.setVisibility(View.GONE);
+                            break;
+                        case "gender":
+                            fragment = new ProfilePicUpload();
+                            next1.setEnabled(true);
+                            next1.setBackgroundColor(getResources().getColor(R.color.colorAccent, null));
+                            progressBar.setVisibility(View.GONE);
+                            break;
+                        case "dp":
+                            fragment = new Bio();
+                            next1.setEnabled(true);
+                            next1.setBackgroundColor(getResources().getColor(R.color.colorAccent, null));
+                            progressBar.setVisibility(View.GONE);
+                            break;
+                        default:
+                            fragment = new NameFrg();
+                            next1.setEnabled(true);
+                            next1.setBackgroundColor(getResources().getColor(R.color.colorAccent, null));
+                            progressBar.setVisibility(View.GONE);
+                            break;
+                    }
 
-            }
-        });
+                }
+            });
+        }
         next1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

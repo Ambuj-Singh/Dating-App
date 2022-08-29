@@ -44,16 +44,30 @@
                 android:layout_margin="2dp" />
 
         </com.google.android.material.card.MaterialCardView>
+
         <TextView
-            android:id="@+id/display_name_visiting"
+            android:id="@+id/display_full_name"
+            style="@style/title_social"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            style="@style/title_social"
-            android:padding="10dp"
-            android:textColor="@color/white"
+            android:layout_marginTop="150dp"
+            android:padding="8dp"
             android:text="@string/dev_name"
-            android:layout_marginTop="150dp"/>
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/display_name_visiting"
+            style="@style/title_social"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="175dp"
+            android:padding="4dp"
+            android:text="@string/dev_name"
+            android:textColor="@color/colorAccent" />
+
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="50dp"
             android:layout_height="50dp"

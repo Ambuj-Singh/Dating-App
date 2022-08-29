@@ -59,7 +59,8 @@ public class DataContext extends SQLiteOpenHelper {
         SQLiteDatabase db_1 = getReadableDatabase();
     /*    String query = "insert into message_table (sender, receiver, imagePath, message, timestamp, filepath, read, delivery) " +
                 "values('"+message.getSender()+"', '"+message.getReceiver()+"', '"+message.getImagePath()+"', '"+message.getMessage()+"', '"+message.getTimestamp()+"', '"+message.getFilePath()+"', "+Tools.booleanToInteger(message.getRead())+","+Tools.booleanToInteger(message.isDelivery())+");";
- */ Log.i("result_insert_1", message.getReceiver());
+ */
+    /*    Log.i("result_insert_1", message.getReceiver());*/
         ContentValues values = new ContentValues();
         values.put("sender",message.getSender());
         values.put("receiver",message.getReceiver());
@@ -374,6 +375,14 @@ public class DataContext extends SQLiteOpenHelper {
         this.getWritableDatabase().execSQL(query);
     }
 
+    public void setReadUpdate(MessageModel messageModel, boolean value) {
+        String whereCondition = "((sender = '" + messageModel.getSender() + "' and receiver='" + messageModel.getReceiver() + "') and (timestamp = '" + messageModel.getTimestamp() + "'))";
+
+        String query = "update message_table set read = "+ Tools.booleanToInteger(value)+" where "+whereCondition+";";
+        this.getWritableDatabase().execSQL(query);
+    }
+
+
     @NonNull
     public String getUsername(){
         String query = "select username from username;";
@@ -407,15 +416,15 @@ public class DataContext extends SQLiteOpenHelper {
     @NonNull
     public String getUID() {
         String query = "select uid from username;";
-        String username = "none";
+        String uid = "none";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
 
-            username = cursor.getString(0);
+            uid = cursor.getString(0);
         }
-        return username;
+        return uid;
     }
 
 

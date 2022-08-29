@@ -14,7 +14,8 @@ import com.google.android.material.card.MaterialCardView;
 public class FriendsListViewModel extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener{
     MaterialCardView materialCardView;
     ImageView profile_pic;
-    TextView title, message_view, time, messageCounter, readStatus;
+    TextView title, message_view, time, messageCounter;
+    ImageView readStatus;
     ImageView onlineOffline;
     FriendsListAdapter.Interaction interaction;
 
