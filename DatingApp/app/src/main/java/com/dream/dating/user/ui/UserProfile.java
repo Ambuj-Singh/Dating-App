@@ -1098,9 +1098,10 @@ ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
 
     private void feedDataToHeaderDisplayUnit(String name, String about_me, String username, int age, int gender, String dp, boolean header_selection) {
         List<Integer> list = new ArrayList<>();
-        list.add(R.drawable.trans_symbol);
         list.add(R.drawable.male_symbol);
         list.add(R.drawable.female_symbol);
+        list.add(R.drawable.trans_symbol);
+
         TextView textView = findViewById(R.id.profile_bio);
         if(header_selection){
             textView.setText(about_me);

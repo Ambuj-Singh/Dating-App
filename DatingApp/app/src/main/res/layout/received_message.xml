@@ -1,70 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout android:layout_height="wrap_content"
     android:layout_width="match_parent"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="1dp"
-            android:layout_gravity="start"
-            android:background="@drawable/received_box"
-            android:orientation="vertical">
-
+    <LinearLayout
+        android:layout_width="334dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/received"
+        android:layout_gravity="start"
+        android:orientation="vertical"
+        android:padding="1dp">
             <!-- Media -->
             <ImageView
                 android:id="@+id/received_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="16dp"
+                android:layout_width="300dp"
+                android:layout_height="400dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:layout_gravity="center"
                 android:padding="8dp"
+                android:visibility="gone"
                 android:scaleType="centerCrop"
                 />
-
-            <!-- Buttons -->
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="start"
                 android:orientation="horizontal"
-                android:layout_gravity="end"
-                android:padding="8dp">
+                android:padding="6dp">
 
                 <!-- Title, secondary and supporting text -->
                 <TextView
                     android:id="@+id/message_received"
                     android:layout_width="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="4dp"
+                    android:maxWidth="250dp"
+                    android:text="adadawdawdwa"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/time_received"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="4dp"
-                    android:textSize="13sp"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="@color/light_grey" />
+                    android:layout_below="@+id/message_sent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:orientation="horizontal">
 
-                <ImageSwitcher
-                    android:id="@+id/message_delivery_status_received"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="bottom|end"
-                    android:background="@drawable/ic_outline_watch_later_24"
-                    android:layout_marginTop="15dp"
-                    />
+                    <TextView
+                        android:id="@+id/time_received"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="4dp"
+                        android:text="8:00 am"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/light_grey"
+                        android:textSize="13sp" />
 
-            </LinearLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
 
         </LinearLayout>
 

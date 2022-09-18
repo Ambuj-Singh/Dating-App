@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:elevation="8dp"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/black"
             android:layout_marginTop="80dp"
             app:cardCornerRadius="250dp">
             <ImageView
@@ -75,13 +75,13 @@
             android:layout_marginEnd="50dp"
             android:elevation="8dp"
             android:layout_marginTop="80dp"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/black"
             app:cardCornerRadius="255dp">
             <TextView
                 android:id="@+id/age_display"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryDark"
+                android:background="@color/black"
                 style="@style/title_social"
                 android:text="@string/dev_age"
                 android:textSize="15sp"

@@ -55,6 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:visibility="invisible"
         android:orientation="vertical">
         <ImageView
             android:layout_width="75dp"
@@ -69,6 +70,27 @@
             android:layout_gravity="center"
             android:textColor="@color/white"
             android:text="No such username found"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/idle_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_round_person_search_24"
+            app:tint="@color/white" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_regular"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:text="Search by username"/>
 
     </LinearLayout>
 </RelativeLayout>

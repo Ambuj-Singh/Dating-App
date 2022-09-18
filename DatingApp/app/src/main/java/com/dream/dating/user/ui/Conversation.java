@@ -7,7 +7,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -30,6 +32,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.work.Data;
 
+import com.bumptech.glide.Glide;
 import com.dream.dating.ConversationMessageList.ConversationListAdapter;
 import com.dream.dating.Encryption;
 import com.dream.dating.Models.MessageModel;
@@ -60,13 +63,17 @@ public class  Conversation extends AppCompatActivity implements ConversationList
     private DataContext dataContext;
     private ConversationListAdapter adapter;
     private static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 101;
+    private static final int PERMISSION_STORAGE_GRANTED = 1;
+    private boolean camera;
+    ActivityResultLauncher<Intent> cameraActivityLauncher;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.conversation);
-
         binding = ConversationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        camera = checkCameraHardware(this);
+        checkAndRequestPermissions(this);
 
         data = new Data.Builder()
                 .putString("status", "UserStatusCon")
@@ -137,6 +144,7 @@ public class  Conversation extends AppCompatActivity implements ConversationList
         });
 
 
+        //checking realtime for changes in messages
         reference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -204,8 +212,29 @@ public class  Conversation extends AppCompatActivity implements ConversationList
 
         //camera button click
         binding.messageInputLayout.displayCamera.setOnClickListener(view ->{
-            
+
+            checkAndRequestPermissions(this);
+
+            if (checkCameraHardware(this))
+                chooseImage(this, camera);
+            else
+                chooseImage(this,camera);
         });
+
+        //cameraActivityLauncher registration
+        cameraActivityLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            // There are no request codes
+                            Intent data = result.getData();
+                            Uri uri = data.getData();
+                            sendToServerPicture(uri);
+                        }
+                    }
+                });
 
     }
 
@@ -256,7 +285,7 @@ public class  Conversation extends AppCompatActivity implements ConversationList
         else return super.onOptionsItemSelected(item);
     }
 
-    public static boolean checkAndRequestPermissions(final Activity context) {
+    public boolean checkAndRequestPermissions(Activity context) {
         int WExtstorePermission = ContextCompat.checkSelfPermission(context,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int cameraPermission = ContextCompat.checkSelfPermission(context,
@@ -273,6 +302,7 @@ public class  Conversation extends AppCompatActivity implements ConversationList
             ActivityCompat.requestPermissions(context, listPermissionsNeeded
                             .toArray(new String[listPermissionsNeeded.size()]),
                     REQUEST_ID_MULTIPLE_PERMISSIONS);
+                chooseImage(this,camera);
             return false;
         }
         return true;
@@ -294,68 +324,109 @@ public class  Conversation extends AppCompatActivity implements ConversationList
                             "FlagUp Requires Access to Your Storage.",
                             Toast.LENGTH_SHORT).show();
                 } else {
-                    chooseImage(Conversation.this);
+                    chooseImage(Conversation.this, camera);
                 }
                 break;
         }
     }
 
-    private void chooseImage(Context context){
-        final CharSequence[] options = {"Take photo","Choose from Gallery","Exit"};
+  /*  @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
+
+        super.onActivityResult(requestCode, resultCode, resultData);
+        if (requestCode == PERMISSION_STORAGE_GRANTED && resultCode == Activity.RESULT_OK) {
+            if (resultData != null) {
+                Uri uri = resultData.getData();
+                sendToServerPicture(uri);
+                 upload(uri, path);
+            }
+        }
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
+            if (resultData != null) {
+                Uri uri = resultData.getData();
+                sendToServerPicture(uri);
+                upload(uri, path);
+            }
+        }
+    }
+*/
+    private void chooseImage(Context context, boolean camera){
+        final CharSequence[] options = {"Choose Camera","Choose from Gallery","Exit"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
         builder.setItems(options, new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog,int i){
-                if(options[i].equals("Take Photo")){
-                    openCameraActivityForResult(binding.getRoot().getRootView());
-
+                if(options[i].equals("Choose Camera")){
+                    if (camera){
+                        openCamera();
+                    }
                 }
                 else if (options[i].equals("Choose from Gallery")){
-                    openGalleryPicker(binding.getRoot().getRootView());
+                    openDirectory();
                 }
                 else if (options[i].equals("Exit")) {
                     dialog.dismiss();
                 }
             }
-        });
+        }).create().show();
     }
 
-    public void openCameraActivityForResult(View view) {
-        ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == Activity.RESULT_OK) {
-                            // There are no request codes
-                            Intent data = result.getData();
-                            Uri uri = data.getData();
-                            sendToServerPicture()
-                        }
-                    }
-                });
-        Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        someActivityResultLauncher.launch(takePicture);
+    /** Check if this device has a camera */
+    private boolean checkCameraHardware(@NonNull Context context) {
+        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)){
+            // this device has a camera
+            return true;
+        } else {
+            // no camera on this device
+            return false;
+        }
     }
 
-    public void openGalleryPicker(View view) {
-        ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == Activity.RESULT_OK) {
-                            // There are no request codes
-                            Intent data = result.getData();
-                            Uri uri = data.getData();
-                        }
-                    }
-                });
-        Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        someActivityResultLauncher.launch(pickPhoto);
+    public void openDirectory() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.setType("image/*");
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        startActivityForResult(intent, PERMISSION_STORAGE_GRANTED);
     }
+
+    private void openCamera(){
+        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, 0);
+    }
+
+    private void sendToServerPicture(Uri uri) {
+        Glide.with(this)
+                .load(uri)
+                .circleCrop()
+                .into(binding.imagetester);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_CANCELED) {
+            switch (requestCode) {
+                case 0:
+                    if (resultCode == RESULT_OK && data != null) {
+                        Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
+                        binding.imagetester.setImageBitmap(selectedImage);
+                    }
+                    break;
+                case 1:
+                    if (resultCode == RESULT_OK && data != null) {
+                        Uri selectedImage = data.getData();
+                        sendToServerPicture(selectedImage);
+                    }
+                    break;
+            }
+        }
+    }
+    //camera2 api new
+
    /* public void enterReveal() {
         circularReveal = true;
         // get the center for the clipping circle

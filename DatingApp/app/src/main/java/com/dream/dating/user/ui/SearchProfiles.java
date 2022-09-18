@@ -70,7 +70,8 @@ public class SearchProfiles extends Fragment {
 
         ImageView search = view.findViewById(R.id.search_button_profiles);
         LinearLayout noSearch = view.findViewById(R.id.no_search_results);
-
+        LinearLayout idle_Search = view.findViewById(R.id.idle_search);
+        idle_Search.setVisibility(View.VISIBLE);
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,11 +92,12 @@ public class SearchProfiles extends Fragment {
 
                         if (value) {
                             recyclerView.setVisibility(View.INVISIBLE);
+
                             noSearch.setVisibility(View.VISIBLE);
                         } else {
                             recyclerView.setVisibility(View.VISIBLE);
                             noSearch.setVisibility(View.GONE);
-
+                            idle_Search.setVisibility(View.GONE);
                             initializeDataSearch(search);
                             StartListener();
                         }
@@ -132,7 +134,6 @@ public class SearchProfiles extends Fragment {
         FirestoreRecyclerOptions<ProfileInfoGrabber> response = new FirestoreRecyclerOptions.Builder<ProfileInfoGrabber>()
                 .setQuery(query, ProfileInfoGrabber.class)
                 .build();
-
 
 
         adapter = new FirestoreRecyclerAdapter<ProfileInfoGrabber, ProfileViewHolder>(response) {

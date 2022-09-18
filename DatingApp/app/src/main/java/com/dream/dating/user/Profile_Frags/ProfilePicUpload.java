@@ -2,10 +2,14 @@ package com.dream.dating.user.Profile_Frags;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,14 +19,20 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.dream.dating.R;
+import com.dream.dating.user.ui.Conversation;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -36,7 +46,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ProfilePicUpload extends Fragment {
@@ -47,7 +59,8 @@ public class ProfilePicUpload extends Fragment {
     private ImageView dp;
     private FloatingActionButton next2;
     private ProgressBar progressBar;
-    private ImageView check;
+    private static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 101;
+    private static final int CAMERA_REQUEST = 1888;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,8 +92,6 @@ public class ProfilePicUpload extends Fragment {
 
         final Button upload2 = view.findViewById(R.id.upload2);
         dp = view.findViewById(R.id.displayPic);
-        check = view.findViewById(R.id.checked);
-        check.setVisibility(View.INVISIBLE);
 
         upload2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +99,8 @@ public class ProfilePicUpload extends Fragment {
                 upload2.setEnabled(false);
                 next2.setEnabled(false);
                 next2.setBackgroundColor(getResources().getColor(R.color.gray,null));
-                getStoragePermission();
+                checkAndRequestPermissions(getActivity());
+                chooseImage(getActivity());
             }
         });
 
@@ -106,7 +118,8 @@ public class ProfilePicUpload extends Fragment {
 
     }
 
-    private void getStoragePermission() {
+    //Old Storage Permission
+  /*  private void getStoragePermission() {
         if (ActivityCompat.checkSelfPermission(getContext(),
                 Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             openDirectory();
@@ -128,6 +141,97 @@ public class ProfilePicUpload extends Fragment {
             }
         }
 
+    }*/
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
+        if (requestCode == PERMISSION_STORAGE_GRANTED && resultCode == Activity.RESULT_OK) {
+            if (resultData != null) {
+                Uri uri = resultData.getData();
+             /*   sendToServerPicture(uri);*/
+                upload(uri, path);
+            }
+        }
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK)
+        {
+            if (resultData != null) {
+                Uri uri = resultData.getData();
+                /*sendToServerPicture(uri);*/
+                 upload(uri, path);
+            }
+        }
+    }
+
+    public boolean checkAndRequestPermissions(final Activity context) {
+        int WExtstorePermission = ContextCompat.checkSelfPermission(context,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int cameraPermission = ContextCompat.checkSelfPermission(context,
+                Manifest.permission.CAMERA);
+        List<String> listPermissionsNeeded = new ArrayList<>();
+        if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.CAMERA);
+        }
+        if (WExtstorePermission != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded
+                    .add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(context, listPermissionsNeeded
+                            .toArray(new String[listPermissionsNeeded.size()]),
+                    REQUEST_ID_MULTIPLE_PERMISSIONS);
+            chooseImage(getActivity());
+            return false;
+
+        }
+        return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_ID_MULTIPLE_PERMISSIONS:
+                if (ContextCompat.checkSelfPermission(getContext(),
+                        Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getContext(),
+                                    "FlagUp Requires Access to Camara.", Toast.LENGTH_SHORT)
+                            .show();
+                } else if (ContextCompat.checkSelfPermission(getContext(),
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getContext(),
+                            "FlagUp Requires Access to Your Storage.",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    chooseImage(getActivity());
+                }
+                break;
+        }
+    }
+
+    private void chooseImage(Context context){
+        final CharSequence[] options = {"Take photo","Choose from Gallery","Exit"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        builder.setItems(options, new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog,int i){
+                if(options[i].equals("Take Photo")){
+                    openCamera();
+                }
+                else if (options[i].equals("Choose from Gallery")){
+                    openDirectory();
+                }
+                else if (options[i].equals("Exit")) {
+                    dialog.dismiss();
+                }
+            }
+        }).create().show();
+    }
+
+    private void openCamera() {
+        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, CAMERA_REQUEST);
     }
 
     public void openDirectory() {
@@ -138,16 +242,6 @@ public class ProfilePicUpload extends Fragment {
         startActivityForResult(intent, PERMISSION_STORAGE_GRANTED);
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
-        getActivity();
-        if (requestCode == PERMISSION_STORAGE_GRANTED && resultCode == Activity.RESULT_OK) {
-            if (resultData != null) {
-                Uri uri = resultData.getData();
-                upload(uri, path);
-            }
-        }
-    }
 
     private void upload(Uri uri, final String path) {
         try {
@@ -187,7 +281,7 @@ public class ProfilePicUpload extends Fragment {
                       next2.setBackgroundColor(getResources().getColor(R.color.colorAccent,null));
 
                       progressBar.setVisibility(View.INVISIBLE);
-                      setProfilePic(uri.toString());
+
 
                   }
               }).addOnFailureListener(new OnFailureListener() {
@@ -224,6 +318,7 @@ public class ProfilePicUpload extends Fragment {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.i("Save Url","Saved");
+                setProfilePic(download);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -233,10 +328,11 @@ public class ProfilePicUpload extends Fragment {
         });
     }
 
-    private void setProfilePic(String path) {
+    private void setProfilePic(String download) {
 
-        Glide.with(getContext())
-                .load(path)
+        Glide.with(this)
+                .load(download)
+                .centerCrop()
                 .into(dp);
     }
 
