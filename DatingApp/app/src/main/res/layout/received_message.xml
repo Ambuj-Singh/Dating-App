@@ -1,32 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout android:layout_height="wrap_content"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingTop="4dp"
     android:paddingBottom="4dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     <LinearLayout
-        android:layout_width="334dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:background="@drawable/received"
         android:layout_gravity="start"
         android:orientation="vertical"
         android:padding="1dp">
             <!-- Media -->
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/round_received_image_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="4dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/dark_grey"
+            app:strokeWidth="0dp">
             <ImageView
                 android:id="@+id/received_image"
-                android:layout_width="300dp"
-                android:layout_height="400dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_gravity="center"
-                android:padding="8dp"
-                android:visibility="gone"
+                android:layout_width="250dp"
+                android:layout_height="350dp"
+                android:background="@drawable/rounded_corner_image_box"
                 android:scaleType="centerCrop"
                 />
-            <RelativeLayout
+        </com.google.android.material.card.MaterialCardView>
+
+        <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
@@ -34,19 +44,19 @@
                 android:padding="6dp">
 
                 <!-- Title, secondary and supporting text -->
-                <TextView
-                    android:id="@+id/message_received"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="4dp"
-                    android:maxWidth="250dp"
-                    android:text="adadawdawdwa"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
+            <TextView
+                android:id="@+id/message_received"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="4dp"
+                android:maxWidth="250dp"
+                android:text="adadawdawdwa"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"

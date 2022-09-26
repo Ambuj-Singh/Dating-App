@@ -425,7 +425,6 @@ public class  Conversation extends AppCompatActivity implements ConversationList
             }
         }
     }
-    //camera2 api new
 
    /* public void enterReveal() {
         circularReveal = true;

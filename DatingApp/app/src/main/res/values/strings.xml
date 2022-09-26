@@ -9,7 +9,7 @@
     <string name="done">Done</string>
     <string name="enter_name">Enter Name</string>
     <string name="name_detail">Please enter a name to display</string>
-    <string name="add_caption">Add a caption</string>
+    <string name="add_caption">Add a message</string>
     <!--Social lines pt 1 start-->
     <string name="first_social">Balanced</string>
     <string name="second_social">Spontaneous</string>

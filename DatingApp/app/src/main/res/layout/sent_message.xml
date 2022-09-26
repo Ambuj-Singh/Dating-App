@@ -8,28 +8,35 @@
 
 
     <LinearLayout
-        android:layout_width="334dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:background="@drawable/sent"
         android:layout_gravity="end"
         android:orientation="vertical"
         android:padding="1dp">
 
-
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/round_sent_image_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="4dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/dark_grey"
+            app:strokeWidth="0dp">
             <!-- Media -->
+
             <ImageView
                 android:id="@+id/sent_image"
-                android:layout_width="300dp"
-                android:layout_height="400dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_gravity="center"
-                android:padding="8dp"
-                android:visibility="gone"
+                android:layout_width="250dp"
+                android:layout_height="350dp"
+                android:background="@drawable/rounded_corner_image_box"
                 android:scaleType="centerCrop"
                 />
 
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- Buttons -->
         <RelativeLayout
@@ -46,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="0dp"
                 android:layout_marginEnd="16dp"
                 android:maxWidth="250dp"
                 android:text="jadwjawddwawdafsfssefseffessefsefsefdagrdrgrdgdrgdrgdrgdrgrdgrdgrwdaawdwawdawdwaaddawwad"
