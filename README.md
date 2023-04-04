@@ -33,21 +33,23 @@ The app is easy-to-use and user-friendly. Everything is labeled and easy to acce
 
 >The app is under development.
 
-* **Profiles** Screen comes first after loading screen.</br>
-<img src="https://user-images.githubusercontent.com/39789077/229485204-f265ef19-c93a-43bd-8cb0-25b8a0e85003.jpg" width="150"></br>
+* **Profiles** Screen comes first after loading screen.</br><img src="https://user-images.githubusercontent.com/39789077/229717013-c8b6befe-07ed-4ced-9ca8-efb1417b4544.jpg" width="150"> <img src="https://user-images.githubusercontent.com/39789077/229485204-f265ef19-c93a-43bd-8cb0-25b8a0e85003.jpg" width="150"></br>
 * You can click on the user profile card to interact with the user.</br>
+* Heart icon represents **Favourite selection**, you can mark any user as Favourite and it will show in your Favourite tab which you can access from your dashboard.</br>
 <img src="https://user-images.githubusercontent.com/39789077/229490481-fe10cc56-1c29-4c87-93e7-b0b688e48cfb.jpg" width="150"> <img src="https://user-images.githubusercontent.com/39789077/229490914-20ec0819-5b3a-4f16-af0b-f40303b4e8c4.jpg" width="150"> 
 <img src="https://user-images.githubusercontent.com/39789077/229491493-93e00766-303f-4855-ac93-c775ed1109ff.jpg" width="150"></br>
-* Heart icon represents **Favourite selection**, you can mark any user as Favourite and it will show in your Favourite tab which you can access from your dashboard.</br>
+* Chat Dialog icon will let you chat to the other user and also that user will be shown in your chat tab which can be accessed from the dasboard.</br>
 <img src="https://user-images.githubusercontent.com/39789077/229490481-fe10cc56-1c29-4c87-93e7-b0b688e48cfb.jpg" width="150"></br>
-* Chat Dialog icon will let you chat to the other user and also that user will be shown in your chat tab which can be accessed from the dasboard.
 * These are **Account Options** here you can edit your profile, logout and upload photos to the server.</br>
 <img src="https://user-images.githubusercontent.com/39789077/229500353-6528028b-ba95-4c75-9d7c-61260d03c61b.jpg" width="150"> <img src="https://user-images.githubusercontent.com/39789077/229499189-1ca0d49b-af3e-42ef-8505-02652e969c2a.jpg" width="150"></br>
 * By clicking on **Edit Profile** option you can edit your profile.</br><img src="https://user-images.githubusercontent.com/39789077/229501549-bddfd672-c1ca-4619-86b1-6750a3f77f77.jpg" width="150"></br>
+* For Example we will first turn the swith on and then click on the field you want to edit.</br><img src="https://user-images.githubusercontent.com/39789077/229698961-80b287e3-de98-432d-89e7-590df82d1e2f.jpg" width="150"> <img src="https://user-images.githubusercontent.com/39789077/229698602-42781ada-3462-4242-86a7-06775dcaa2d2.jpg" width="150"> <img src="https://user-images.githubusercontent.com/39789077/229699136-717121a8-4b73-4df6-8be8-d2decafeb4d2.jpg" width="150"></br>
 * For Example we will first turn the swith on and then click on the field you want to edit.</br>
+<img src="https://user-images.githubusercontent.com/39789077/229699676-2ec79726-feab-4a22-ab23-a2cea15061ab.jpg" width="150"> <img src="https://user-images.githubusercontent.com/39789077/229699803-49ebd212-983f-4180-9890-0812691080cb.jpg" width="150"> <img src="https://user-images.githubusercontent.com/39789077/229699818-37a6faa4-7f3e-491b-ac36-d81d8cad1279.jpg" width="150">
 
 </br>
+
 >Some features are under development.
 
 
-### Overall the app was designed to only simulate a part of end-to-end encryption using AES-128 with ECB Packaging.
+### Overall the app was designed to only simulate a part of end-to-end encryption using AES-128 encryption with ECB Packaging.
