@@ -6,7 +6,7 @@
 
 In this project I used ***Firebase*** as the server and for frontend, I used android xml. 
 
-* The app is designed to accomodate almost all screen sizes in mobile and tablet devices.
+* The app is designed to accomodate almost all screen sizes in mobile and tablet devices.</br><img src="https://user-images.githubusercontent.com/39789077/229717013-c8b6befe-07ed-4ced-9ca8-efb1417b4544.jpg" width="150"> <img src="https://user-images.githubusercontent.com/39789077/232704562-55806b06-93cb-4cb3-b3ac-fbd65dfa6ab7.jpg" width="200"></br>
 * It has a persistent server which means even if you lose network, whenever the internet connection is live again it will receive and send message automatically.
 * Chats are stored on the local database using ***Android*** and ***SQLite***.
 ```mermaid
