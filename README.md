@@ -58,4 +58,6 @@ The app is easy-to-use and user-friendly. Everything is labeled and easy to acce
 >
 > Please be a decent person and give me proper credit by linking back to my website! Refer to this handy [quora post](https://www.quora.com/Is-it-bad-to-copy-other-peoples-code) if you're not sure.
 
+### Contact me for any details regarding the app and code features.
+### Email - sambuj.github@gmail.com
 ### Overall the app was designed to only simulate a part of end-to-end encryption using AES-128 encryption with ECB Packaging.
