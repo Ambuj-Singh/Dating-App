@@ -72,11 +72,13 @@ public class ChatListFrag extends Fragment implements FriendsListAdapter.Interac
     @Override
     public void onChatClicked(int position) {
         String receiver = users.get(position).getUsername();
+        String receiver_name = users.get(position).getName();
         Log.i("result_insert_list", receiver);
         Intent i = new Intent(getActivity(), Conversation.class);
         String sender = dataContext.getUsername();
         i.putExtra("sender",sender);
         i.putExtra("receiver", receiver);
+        i.putExtra("receiver_name",receiver_name);
         Log.i("sender_server",sender);
         startActivity(i);
     }

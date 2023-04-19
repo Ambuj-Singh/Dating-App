@@ -8,13 +8,18 @@
     android:orientation="vertical"
     tools:openDrawer="start">
 
-  <include layout="@layout/nav_header_main"
+  <include
+      layout="@layout/nav_header_main"
       android:layout_width="match_parent"
       android:layout_height="wrap_content" />
-  <include layout="@layout/menu_container"
-      android:layout_height="wrap_content"
-      android:layout_width="match_parent"/>
-  <include layout="@layout/lower_banner_anchat"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"/>
+
+  <include
+      layout="@layout/menu_container"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+
+  <include
+      layout="@layout/lower_banner_anchat"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent" />
 </LinearLayout>

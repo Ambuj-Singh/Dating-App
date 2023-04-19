@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -37,34 +38,44 @@ import com.dream.dating.ConversationMessageList.ConversationListAdapter;
 import com.dream.dating.Encryption;
 import com.dream.dating.Models.MessageModel;
 import com.dream.dating.Models.UserInfo;
+import com.dream.dating.ProfileInfoGrabber;
 import com.dream.dating.R;
 import com.dream.dating.Services.DataContext;
 import com.dream.dating.Tools;
+import com.dream.dating.account.AccountActivity;
 import com.dream.dating.databinding.ConversationBinding;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class  Conversation extends AppCompatActivity implements ConversationListAdapter.Interaction {
+public class Conversation extends AppCompatActivity implements ConversationListAdapter.Interaction {
 
     private ConversationBinding binding;
     private static final int DATABASE_VERSION = 2;
     private SQLiteDatabase sqLiteDatabase;
     private DatabaseReference databaseReference;
     private Data data;
-    private String receiver, sender;
+    private String receiver, sender, receiver_uid, receiver_name;
     private DataContext dataContext;
     private ConversationListAdapter adapter;
     private static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 101;
     private static final int PERMISSION_STORAGE_GRANTED = 1;
     private boolean camera;
+    private DocumentReference df_user;
     ActivityResultLauncher<Intent> cameraActivityLauncher;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,16 +92,60 @@ public class  Conversation extends AppCompatActivity implements ConversationList
 
         Bundle bundle = getIntent().getExtras();
         receiver = bundle.getString("receiver");
+        receiver_name = bundle.getString("receiver_name");
+        binding.titleUsername.setText(receiver_name);
         Log.i("result_insert_bundle", receiver);
         sender = bundle.getString("sender");
+
         String msg_table = "message_table";
 
+        //Accessing Firebase Realtime Database
         FirebaseDatabase database = FirebaseDatabase.getInstance(Tools.firebaseURL);
         databaseReference = database.getReference(receiver + "/messages");
         DatabaseReference reference = database.getReference(sender + "/messages");
 
+        //Accessing Firebase Firestore
+        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+        Query query = firebaseFirestore.collection("users").whereEqualTo("username", receiver);
+//        String UserUID = FirebaseAuth.getInstance().getUid();
 
-        //Accessing Database
+        //fetching receiver's profile picture
+        getQuery(query, new getQueryResult() {
+            @Override
+            public void onCallback(String url, String uid) {
+                    if(!url.equals("none")) {
+                        Log.i("ProfileURl",url);
+                        Glide.with(getApplicationContext())
+                                .load(url)
+                                .circleCrop()
+                                .into(binding.titleImage);
+                    }
+
+                    if(uid!=null){
+                        receiver_uid = uid;
+                    }
+                }
+
+        });
+
+        binding.titleImageText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(!receiver_uid.isEmpty()) {
+                    Intent i = new Intent(Conversation.this, UserProfile.class);
+                    i.putExtra("uid", receiver_uid);
+                    startActivity(i);
+                }
+                else {
+                    Toast.makeText(Conversation.this, "Fetching user, try again also check your internet connection", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
+
+    //Accessing Database
         dataContext = new DataContext(this);
         sqLiteDatabase = dataContext.getWritableDatabase();
         List<MessageModel> messageModelList = dataContext.getAllChatMessages(sender, receiver);
@@ -263,23 +318,18 @@ public class  Conversation extends AppCompatActivity implements ConversationList
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        Log.i("clear chat","clear chat");
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
+        Log.i("clear chat", item.getTitle().toString());
         if (item.getItemId() == R.id.toolbar_delete) {
+            Log.i("clear chat","clear chat");
             dataContext.clearChat(sender, receiver);
             adapter.deleteAllMessage();
             Toast.makeText(this, "Chat Cleared", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        else if(item.getItemId() == R.id.toolbar_view){
-            UserInfo user = dataContext.getUserInfo(receiver);
-            Intent i = new Intent(this,UserProfile.class);
-            i.putExtra("uid",user.getUID());
-            startActivity(i);
             return true;
         }
         else return super.onOptionsItemSelected(item);
@@ -328,6 +378,26 @@ public class  Conversation extends AppCompatActivity implements ConversationList
                 }
                 break;
         }
+    }
+
+    private interface getQueryResult {
+        void onCallback(String value, String uid);
+    }
+
+    private void getQuery(Query query, final getQueryResult callback) {
+        query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (queryDocumentSnapshots.size() != 0) {
+                  DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
+                  String url = documentSnapshot.getString("ProfileURL");
+                  String uid = documentSnapshot.getString("UID");
+                  callback.onCallback(url,uid);
+                } else {
+                    callback.onCallback("none",null);
+                }
+            }
+        });
     }
 
   /*  @Override
