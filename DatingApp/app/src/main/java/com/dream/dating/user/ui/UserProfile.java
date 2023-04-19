@@ -1181,7 +1181,8 @@ ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
         });
     }
 
-    private void feedingDataToDisplayUnits(int balance, int activity, int neatness, int nature,List<String> profession,List<String> religion,List<String> food,List<String> music,List<String> sports,List<String> going,List<String> travel,List<String> interests, List<String> languages,List<String> lookings,List<String> smokers,List<String> bodyType,List<String> bodyHair,List<String> eyeColor,List<String> hairColor,List<String> piercing,List<String> tattoo, boolean general_switch, boolean social_switch){
+    private void
+    feedingDataToDisplayUnits(int balance, int activity, int neatness, int nature,List<String> profession,List<String> religion,List<String> food,List<String> music,List<String> sports,List<String> going,List<String> travel,List<String> interests, List<String> languages,List<String> lookings,List<String> smokers,List<String> bodyType,List<String> bodyHair,List<String> eyeColor,List<String> hairColor,List<String> piercing,List<String> tattoo, boolean general_switch, boolean social_switch){
         String delimiter = ", ";
         //dots image view
         ImageView social_1 = findViewById(balance);
@@ -1267,12 +1268,16 @@ ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
     }
 
     public String checkingForNone(List<String> string){
-       if(string==null){
-           return "None";
-       }
-       else{
-           return  string.get(0);
-       }
+        try {
+            if (string == null) {
+                return "None";
+            } else {
+                return string.get(0);
+            }
+        }
+        catch (Exception e){
+            return "None";
+        }
     }
     @SuppressLint("SetTextI18n")
     public void DisplayForNone(){
